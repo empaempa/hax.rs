@@ -68,8 +68,6 @@ define( [
 			return nativeCode;
 		};
 
-		console.log( doTranslate( "låda hej = gör() { låda a = 0; tillbaka a; }" ));
-
 		// shared
 		// this need a proper lexer 
 

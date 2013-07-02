@@ -28,6 +28,23 @@ define( [
 			return this.things[ name ] = new Thing( { name: name } );
 		};
 
+		App.prototype.getThing = function( name ) {
+			if( !this.doesThingExists( name )) {
+				console.error( "App.getThing: no " + name + " available" );
+				return;
+			}
+
+			return this.things[ name ];
+		};
+
+		App.prototype.thingsAsArray = function() {
+			var a = [];
+			for( var thing in this.things ) {
+				a.push( this.things[ thing ] );
+			}
+			return a;
+		};
+
 		App.prototype.compile = function() {
 			Compiler.process( this );
 		};

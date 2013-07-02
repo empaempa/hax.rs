@@ -1,23 +1,56 @@
+require.config({
+	paths: {
+		jquery  : "libs/jquery",
+		angular : "libs/angular",
+		cm 		: "libs/cm/codemirror"      
+	},
+	shim: {
+		"angular" : { "exports" : "angular" },
+		"cm"      : { "exports" : "cm" }
+	},
+	priority: [
+		"angular"
+	]
+});
+
 require( [ 
+	"jquery",
+	"angular",
 	"editor/Editor",
 	"player/Player",
 	"app/App" ],
-	function( Editor, Player, App ) {
+	function( $, angular, Editor, Player, App ) {
+		
+		"use strict";
 
-		var editor = CodeMirror( document.getElementById( "code" ), {
-			value: "var a = 1",
-			mode:  "javascript",
-			indent: true
-		} );
+    	angular.element( document ).ready( function() {
 
+    		// create module, editor and app
 
-		var app = new App();
-		app.compile();
+    		var haxrs  = angular.module( "haxrs", [] );
+			var editor = new Editor();			
+			var app    = new App();
 
-		var rita = {
-			hello: function() { console.log( "hello" ); }
-		}
+			// just add some working code
 
-		new app.runable( rita );
+			app.getThing( "Main" ).getMethod( "construct" ).code = "this.gubbe = new Gubbe();";
+			app.getThing( "Main" ).getMethod( "update"    ).code = "this.gubbe.jump();";
+
+			app.addThing( "Gubbe" );
+			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "this.a = 0;";
+			app.getThing( "Gubbe" ).addMethod( "jump"      ).code = "this.a++; console.log( this.a );";
+
+			// wire the ng module
+
+			haxrs.value( "app", app );
+			haxrs.config( function( $routeProvider ) {
+					$routeProvider.
+						when( "/", { controller: "Editor.AppCtrl", templateUrl: "partials/editor.html" } ).
+						otherwise( { redirectTo: "/" } );
+				}
+			);
+
+			angular.bootstrap( document, [ 'haxrs' ] );
+    	} );
 	}
 );

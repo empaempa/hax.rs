@@ -1,38 +1,51 @@
-define( [
-	"app/Method",
-	"app/Thing",
-	"editor/Compiler" ],
-	function( Method, Thing, Compiler ) {
+define( [ 
+	"jquery",
+	"angular",
+	"cm" ],
+	function( $, angular, CM ) {
 
 		"use strict";
 
+		// constructor
+
 		function Editor() {
+			angular.module( "haxrs" ).controller( "Editor.AppCtrl",    Editor.appController    );
+			angular.module( "haxrs" ).controller( "Editor.ThingCtrl",  Editor.thingController  );
+			angular.module( "haxrs" ).controller( "Editor.MethodCtrl", Editor.methodController );
+			angular.module( "haxrs" ).value( "editor", this );
 		}
 
-		Editor.prototype.showThing = function( name ) {
-			if( this.things[ name ] === undefined ) {
-				console.error( "Editor.showThing: " + name + " doesn't exists" );
-				return;
-			}
+		// editor controllers
 
-			this.clearAllMethods();
-			var thing = things[ name ];
-
-			for( var method in thing.methods ) {
-				this.addMethod( thing.methods[ method ] );
-			}
+		Editor.appController = function( $scope, app ) {
+			$scope.name   = app.name || "MyCoolApp!";
+			$scope.things = app.things;
 		};
 
-		Editor.prototype.clearAllMethods = function() {
+		Editor.thingController = function( $scope ) {
 		};
 
-		Editor.prototype.addMethod = function( thing, method ) {
-			if( method.type === Method.INSTANCE ) {
-				// add to instance
-			} else {
-				// add to static
-			}
+		Editor.methodController = function( $scope, $element ) {
+
+			var method        = $scope.$parent.method;				// feels hackish but couldn't figure out how to get it
+			var editorElement = $element.find( ".cm" )[ 0 ];		// searches for the code mirror class
+
+			var editor = CodeMirror( editorElement, {
+				value:  method.code,
+				mode:   "javascript",
+				indent: true
+			} );
+
+			editor.on( "change", function() {
+				method.code = editor.getValue();
+			} );
 		};
+
+		// editor directives
+
+		Editor.somethingDirective = function() {
+			// maybe the code mirror should be a directive?
+		}
 
 		return Editor;
 	}
