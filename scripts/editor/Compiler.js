@@ -1,10 +1,9 @@
 define( [
-		"locale/Locale" ],
-	function( Locale ) {
-
+	"config",
+	"locale/Locale!"
+],
+	function( config, Locale ) {
 		"use strict";
-
-		// api
 
 		var Compiler = {};
 
@@ -13,28 +12,50 @@ define( [
 			this.lint( app );
 			this.assemble( app );
 			return app;
-		}
+		};
 
 		Compiler.translate = function( app ) {
 			for( var thingName in app.things ) {
 				var thing = app.things[ thingName ];
 				thing.setNativeCode( doTranslate( thing.getCode()));
 			}
-		}
+		};
 
 		Compiler.lint = function( app ) {
+
 		};
 
 		Compiler.assemble = function( app ) {
 			var nativeCode;
-			nativeCode  = "'use strict'; (function() { var rita; function App( $rita ) { rita = $rita; this.main = new Main(); requestAnimationFrame( this.update.bind( this )); } App.prototype.update = function() { this.main.update(); };\n\n";
+			var tools = config.tools;
+
+			var toolDeclaration = "";
+			var toolParameters = "";
+			var toolAssignment = "";
+			for (var i = 0; i < tools.length; i++) {
+				if (i === 0) {
+					toolDeclaration += "var ";
+				}
+				var translated = Locale.translateTool(tools[i]).toLowerCase();
+				toolDeclaration += translated;
+				toolParameters += "$"+tools[i].toLowerCase();
+				toolAssignment += translated+" = $"+tools[i].toLowerCase()+";\n\t\t";
+				if (i+1 !== tools.length) {
+					toolDeclaration += ", ";
+					toolParameters += ", ";
+				} else {
+					toolDeclaration += ";\n\t";
+				}
+			}
+
+			nativeCode  = "'use strict';\n(function () {\n\t"+toolDeclaration+"\n\tfunction App( "+toolParameters+" ) {\n\t\t"+toolAssignment+"\n\t\tthis.main = new Main();\n\t\tthis.update();\n\t}\n\tApp.prototype.update = function() {\n\t\tthis.main.update();\n\t\trequestAnimationFrame( this.update.bind( this ) );\n\t};\n";
 
 			for( var thing in app.things ) {
 				nativeCode += app.things[ thing ].getNativeCode();
 			}
 
-			nativeCode += "\nreturn App;})();";
-
+			nativeCode += "\treturn App;\n}());";
+			app.nativeCode = nativeCode;
 			app.setRunable( eval( nativeCode ));
 		};
 

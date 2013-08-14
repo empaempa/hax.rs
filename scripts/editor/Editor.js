@@ -2,7 +2,7 @@ define( [
 	"jquery",
 	"angular",
 	"cm" ],
-	function( $, angular, CM ) {
+	function( $, angular, CM ) { // Todo: remove/convert/shim CodeMirror to require.js module.
 
 		"use strict";
 
@@ -20,9 +20,11 @@ define( [
 		Editor.appController = function( $scope, app ) {
 			$scope.name   = app.name || "MyCoolApp!";
 			$scope.things = app.things;
+			$scope.output = app.nativeCode;
 		};
 
 		Editor.thingController = function( $scope ) {
+			
 		};
 
 		Editor.methodController = function( $scope, $element ) {

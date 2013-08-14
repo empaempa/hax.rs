@@ -7,6 +7,7 @@ define( [
 
 		function App() {
 			this.things = {};
+			this.nativeCode = "";
 			this.runable = function() {};
 			this.addMainThing();
 		}
@@ -54,7 +55,7 @@ define( [
 		};
 
 		App.prototype.getRunable = function() {
-			return this.runable();
+			return this.runable;
 		};
 
 		return App;

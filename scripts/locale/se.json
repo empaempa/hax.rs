@@ -1,0 +1,20 @@
+{
+	"tools": {
+		"draw": {
+			"name": "rita",
+			"methods": {
+				"rectangle": "rektangel",
+				"line": "linje",
+				"circle": "cirkel"
+			}
+		}
+	},
+	"core": {
+		"var": "låda",
+		"for": "för",
+		"function": "gör",
+		"return": "tillbaka",
+		"this": ["min", "mitt"],
+		"new": ["ny", "nytt"]
+	}
+}

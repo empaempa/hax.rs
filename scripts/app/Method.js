@@ -24,11 +24,11 @@ define( [
 
 		Method.prototype.getCode = function() {
 			if( this.type === Method.CONSTRUCTOR ) {
-				return "function " + this.thing.name + "( " + this.parameters.join( "," ) + " ) { " + this.code + " };\n\n";
+				return "\tfunction " + this.thing.name + "( " + this.parameters.join( ", " ) + " ) {\n" + this.code + "\n\t};\n\n";
 			} else if( this.type === Method.INSTANCE ) {
-				return this.thing.name + ".prototype." + this.name + " = function( " + this.parameters.join( "," ) + " ) { " + this.code + " }\n\n";
+				return "\t"+this.thing.name + ".prototype." + this.name + " = function ( " + this.parameters.join( ", " ) + " ) {\n" + this.code + "\n\t}\n\n";
 			} else {
-				return this.thing.name + "." + this.name + " = function( " + this.parameters.join( "," ) + " ) { " + this.code + " }\n\n";
+				return "\t"+this.thing.name + "." + this.name + " = function ( " + this.parameters.join( ", " ) + " ) {\n" + this.code + "\n\t}\n\n";
 			}
 		};
 
