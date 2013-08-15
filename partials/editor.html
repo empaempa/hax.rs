@@ -1,12 +1,1 @@
-Things in {{ name }}:
-<ul ng-repeat="thing in things">
-	<li>{{ thing.name }}</li>
-	<ul ng-repeat="method in thing.methods" ng-controller="Editor.MethodCtrl">
-		<li>
-			{{method.name}}
-			<div class="cm" id="method-{{method.name}}"></div>
-		</li>
-	</ul>
-</ul>
-<button type="button">Run</button><br>
-<textarea cols=80 rows=50>{{output}}</textarea>
+<things></things>

@@ -1,0 +1,14 @@
+Things in {{ name }}:
+
+<select ng-model="thing" ng-options="t.name for t in things"></select>
+<thing></thing>
+
+<!--<ul ng-repeat="thing in things" ng-controller="EditorCtrl.ThingCtrl">
+	<li>
+		{{ thing.name }}<br>
+		<thing-editor></thing-editor>
+	</li>
+	
+</ul>-->
+<button type="button" ng-click="runApp()">Run</button><br>
+<textarea cols=80 rows=50>{{output}}</textarea>

@@ -2,13 +2,14 @@ require.config({
 	paths: {
 		jquery  : "libs/jquery",
 		angular : "libs/angular",
-		cm 		: "libs/cm/codemirror",
+		//cm 		: "libs/cm/codemirror",
 		signals : "libs/signals.min",
-		text    : "libs/require.text"
+		text    : "libs/require.text",
+		directives: "../directives"
 	},
 	shim: {
 		angular : { "exports" : "angular" },
-		cm      : { "exports" : "CodeMirror" }
+		//cm      : { "exports" : "CodeMirror" }
 	},
 	priority: [
 		"angular"
@@ -18,12 +19,15 @@ require.config({
 require( [ 
 	"jquery",
 	"angular",
-	"editor/Editor",
+	"controllers/EditorCtrl",
+	"controllers/ThingsDirCtrl",
+	"controllers/ThingDirCtrl",
+	"controllers/MethodDirCtrl",
 	"player/Player",
 	"app/App",
 	"config",
 	"tools/Draw" ],
-	function( $, angular, Editor, Player, App, config, Draw ) {
+	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, Player, App, config, Draw ) {
 		"use strict";
 
     	angular.element( document ).ready( function() {
@@ -31,8 +35,9 @@ require( [
     		// create module, editor and app
 
     		var haxrs  = angular.module( "haxrs", [] );
-			var editor = new Editor();
+			var editor = new EditorCtrl();
 			var app    = new App();
+			haxrs.value( "app", app );
 
 			// just add some working code
 
@@ -46,24 +51,26 @@ require( [
 			var st = performance.now();
 			app.compile();
 			var et = performance.now();
-			console.log("Compiled in", et-st, "ms");
+			//console.log("Compiled in", et-st, "ms");
 
-			var executable = app.getRunable();
+			
+			//console.log(app.nativeCode);
 
-			//console.log(executable);
-			console.log(app.nativeCode);
-
-			new executable(new Draw());
+			app.run();
 
 			// wire the ng module
-
-			haxrs.value( "app", app );
+			
 			haxrs.config( function( $routeProvider ) {
 					$routeProvider.
-						when( "/", { controller: "Editor.AppCtrl", templateUrl: "partials/editor.html" } ).
+						when( "/", { controller: "EditorCtrl.AppCtrl", templateUrl: "partials/editor.html" } ).
 						otherwise( { redirectTo: "/" } );
 				}
 			);
+
+			haxrs.directive("things", ThingsDirCtrl);
+			haxrs.directive("thing", ThingDirCtrl);
+			haxrs.directive("methodEditor", MethodDirCtrl);
+			
 
 			angular.bootstrap( document, [ 'haxrs' ] );
     	} );

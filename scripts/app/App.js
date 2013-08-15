@@ -1,12 +1,14 @@
 define( [
 	"app/Thing",
-	"editor/Compiler" ],
-	function( Thing, Compiler ) {
+	"editor/Compiler",
+	"tools/Draw" ],
+	function( Thing, Compiler, Draw ) {
 
 		"use strict";
 
 		function App() {
 			this.things = {};
+			this.thingsAsArray = [];
 			this.nativeCode = "";
 			this.runable = function() {};
 			this.addMainThing();
@@ -25,8 +27,10 @@ define( [
 				console.error( "App.addThing: Thing " + name + " already exists, not adding" );
 				return;
 			}
-
-			return this.things[ name ] = new Thing( { name: name } );
+			var thing = new Thing( { name: name } );
+			this.things[ name ] = thing;
+			this.thingsAsArray.push( thing );
+			return thing;
 		};
 
 		App.prototype.getThing = function( name ) {
@@ -36,14 +40,6 @@ define( [
 			}
 
 			return this.things[ name ];
-		};
-
-		App.prototype.thingsAsArray = function() {
-			var a = [];
-			for( var thing in this.things ) {
-				a.push( this.things[ thing ] );
-			}
-			return a;
 		};
 
 		App.prototype.compile = function() {
@@ -56,6 +52,12 @@ define( [
 
 		App.prototype.getRunable = function() {
 			return this.runable;
+		};
+		
+		App.prototype.run = function() {
+			var toolchain = [new Draw()];
+
+			return new this.runable(toolchain[0]);
 		};
 
 		return App;
