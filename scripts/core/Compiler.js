@@ -7,11 +7,10 @@ define( [
 
 		var Compiler = {};
 
-		Compiler.process = function( app ) {
+		Compiler.build = function( app ) {
 			this.translate( app );
 			this.lint( app );
-			this.assemble( app );
-			return app;
+			return this.assemble( app );
 		};
 
 		Compiler.translate = function( app ) {
@@ -48,7 +47,7 @@ define( [
 				}
 			}
 
-			nativeCode  = "'use strict';\ntry {(function () {\n\t"+toolDeclaration+"\n\tfunction App( "+toolParameters+" ) {console.log(arguments);\n\t\t"+toolAssignment+"\n\t\tthis.main = new Main();\n\t\tthis.update();\n\t}\n\tApp.prototype.update = function() {\n\t\tthis.main.update();\n\t\trequestAnimationFrame( this.update.bind( this ) );\n\t};\n";
+			nativeCode  = "'use strict';\ntry {(function () {\n\t"+toolDeclaration+"\n\tfunction App( "+toolParameters+" ) {\n\t\t"+toolAssignment+"\n\t\tthis.main = new Main();\n\t\tthis.update();\n\t}\n\tApp.prototype.update = function() {\n\t\tthis.main.update();\n\t\trequestAnimationFrame( this.update.bind( this ) );\n\t};\n";
 
 			for( var thing in app.things ) {
 				nativeCode += app.things[ thing ].getNativeCode();
@@ -61,7 +60,8 @@ define( [
 			} catch (e) {
 				console.log(typeof e.stack, e.stack);
 			}
-			app.setRunable( runable );
+			
+			return runable;
 		};
 
 		// private

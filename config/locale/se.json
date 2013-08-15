@@ -5,7 +5,8 @@
 			"methods": {
 				"rectangle": "rektangel",
 				"line": "linje",
-				"circle": "cirkel"
+				"circle": "cirkel",
+				"clear": "rensa"
 			}
 		}
 	},

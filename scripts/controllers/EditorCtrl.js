@@ -17,12 +17,7 @@ define( [
 			$scope.name   = app.name || "MyCoolApp!";
 			$scope.things = app.thingsAsArray;
 			$scope.thing = app.thingsAsArray[0];
-			
-			$scope.runApp = function () {
-				app.compile();
-				$scope.output = app.nativeCode;
-				app.run();
-			}
+			$scope.app = app;
 		};
 
 		return EditorCtrl;

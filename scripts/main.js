@@ -29,12 +29,12 @@ require( [
 	"controllers/ThingsDirCtrl",
 	"controllers/ThingDirCtrl",
 	"controllers/MethodDirCtrl",
+	"controllers/PlayerDirCtrl",
 
-	"core/Player",
 	"core/App",
 	"json!config",
 	"tools/Draw" ],
-	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, Player, App, config, Draw ) {
+	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, config, Draw ) {
 		"use strict";
 
     	angular.element( document ).ready( function() {
@@ -52,7 +52,7 @@ require( [
 			app.getThing( "Main" ).getMethod( "update"    ).code = "min.gubbe.hoppa();";
 
 			app.addThing( "Gubbe" );
-			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;\nrita.rektangel(1,2,3,4);";
+			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;\nrita.rektangel(10,20,30,40);";
 			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).code = "mitt.a++;";
 			
 			//console.log(app.nativeCode);
@@ -69,6 +69,7 @@ require( [
 			haxrs.directive("things", ThingsDirCtrl);
 			haxrs.directive("thing", ThingDirCtrl);
 			haxrs.directive("methodEditor", MethodDirCtrl);
+			haxrs.directive("player", PlayerDirCtrl);
 			
 
 			angular.bootstrap( document, [ 'haxrs' ] );

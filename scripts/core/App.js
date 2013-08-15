@@ -1,8 +1,6 @@
 define( [
-	"core/Thing",
-	"core/Compiler",
-	"tools/Draw" ],
-	function( Thing, Compiler, Draw ) {
+	"core/Thing" ],
+	function( Thing ) {
 
 		"use strict";
 
@@ -10,7 +8,6 @@ define( [
 			this.things = {};
 			this.thingsAsArray = [];
 			this.nativeCode = "";
-			this.runable = function() {};
 			this.addMainThing();
 		}
 
@@ -40,28 +37,6 @@ define( [
 			}
 
 			return this.things[ name ];
-		};
-
-		App.prototype.compile = function() {
-
-			var st = performance.now();
-			Compiler.process( this );
-			var et = performance.now();
-			//console.log("Compiled in", et-st, "ms");
-		};
-
-		App.prototype.setRunable = function( runable ) {
-			this.runable = runable;
-		};
-
-		App.prototype.getRunable = function() {
-			return this.runable;
-		};
-		
-		App.prototype.run = function() {
-			var toolchain = [new Draw()];
-
-			return new this.runable(toolchain[0]);
 		};
 
 		return App;
