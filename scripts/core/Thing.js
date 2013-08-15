@@ -1,5 +1,5 @@
 define( [
-	"app/Method" ],
+	"core/Method" ],
 	function( Method ) {
 
 		"use strict";

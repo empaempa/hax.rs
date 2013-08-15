@@ -5,7 +5,12 @@ require.config({
 		//cm 		: "libs/cm/codemirror",
 		signals : "libs/signals.min",
 		text    : "libs/require.text",
-		directives: "../directives"
+		json    : "libs/require.json",
+
+		directives: "../directives",
+		tools   : "core/tools",
+		locale  : "../config/locale",
+		config  : "../config/config.json"
 	},
 	shim: {
 		angular : { "exports" : "angular" },
@@ -19,13 +24,15 @@ require.config({
 require( [ 
 	"jquery",
 	"angular",
+
 	"controllers/EditorCtrl",
 	"controllers/ThingsDirCtrl",
 	"controllers/ThingDirCtrl",
 	"controllers/MethodDirCtrl",
-	"player/Player",
-	"app/App",
-	"config",
+
+	"core/Player",
+	"core/App",
+	"json!config",
 	"tools/Draw" ],
 	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, Player, App, config, Draw ) {
 		"use strict";
@@ -47,16 +54,8 @@ require( [
 			app.addThing( "Gubbe" );
 			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;\nrita.rektangel(1,2,3,4);";
 			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).code = "mitt.a++;";
-
-			var st = performance.now();
-			app.compile();
-			var et = performance.now();
-			//console.log("Compiled in", et-st, "ms");
-
 			
 			//console.log(app.nativeCode);
-
-			app.run();
 
 			// wire the ng module
 			

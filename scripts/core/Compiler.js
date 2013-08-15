@@ -1,6 +1,6 @@
 define( [
-	"config",
-	"locale/Locale!"
+	"json!config",
+	"core/Locale!"
 ],
 	function( config, Locale ) {
 		"use strict";

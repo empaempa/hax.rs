@@ -1,6 +1,6 @@
 define( [
-	"app/Thing",
-	"editor/Compiler",
+	"core/Thing",
+	"core/Compiler",
 	"tools/Draw" ],
 	function( Thing, Compiler, Draw ) {
 
@@ -43,7 +43,11 @@ define( [
 		};
 
 		App.prototype.compile = function() {
+
+			var st = performance.now();
 			Compiler.process( this );
+			var et = performance.now();
+			//console.log("Compiled in", et-st, "ms");
 		};
 
 		App.prototype.setRunable = function( runable ) {

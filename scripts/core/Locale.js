@@ -1,7 +1,7 @@
 define({
 load: function (name, req, onload, reqconf) {
 req( [
-	"signals", "config"
+	"signals", "json!config"
 ], function ( signals, config ) {
 	"use strict";
 

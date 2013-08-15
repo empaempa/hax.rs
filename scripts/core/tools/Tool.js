@@ -1,5 +1,5 @@
 define( [
-	"locale/Locale!"
+	"core/Locale!"
 ], function( Locale ) {
 	"use strict";
 
