@@ -20,6 +20,10 @@ define( [
 		};
 
 		App.prototype.addThing = function( name ) {
+			if (typeof name !== "string" || name.length ===0) {
+				console.error("App.addThing: Invalid name");
+				return;
+			}
 			if( this.doesThingExists( name )) {
 				console.error( "App.addThing: Thing " + name + " already exists, not adding" );
 				return;
@@ -37,6 +41,16 @@ define( [
 			}
 
 			return this.things[ name ];
+		};
+
+		App.prototype.removeThing = function( name ) {
+			if( !this.doesThingExists( name )) {
+				console.error( "App.removeThing: no " + name + " available" );
+				return;
+			}
+			var thing = this.things[name];
+			this.thingsAsArray.splice(this.thingsAsArray.indexOf(thing), 1);
+			delete this.things[name];
 		};
 
 		return App;

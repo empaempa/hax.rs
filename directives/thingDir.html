@@ -1,6 +1,14 @@
+
+Rename thing: <input type="text" ng-model="thing.name" ng-disabled="thing.name == 'Main'">
+<br>
+<button ng-click="removeThing()" ng-disabled="thing.name == 'Main'">Remove thing</button>
+<br>
+<br>
+<form ng-submit="addMethod()">
+	<input type="text" ng-model="methodName" size="30" placeholder="Add new method">
+	<input class="btn-primary" type="submit" value="add">
+</form>
+
 <ul ng-repeat="method in thing.methods">
-	<li>
-		{{thing.name}}'s {{method.name}} method ( {{method.parameters.join(", ")}} )<br>
-		<method-editor></method-editor>
-	</li>
+	<li><method-editor></method-editor></li>
 </ul>

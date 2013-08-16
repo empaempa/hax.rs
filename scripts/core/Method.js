@@ -18,7 +18,7 @@ define( [
 			}
 			return this;
 		};
-
+		
 		Method.prototype.setCode = function( code ) {
 			this.code = code;
 		};

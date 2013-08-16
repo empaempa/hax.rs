@@ -17,7 +17,13 @@ define( [
 
 
 		ThingsDirCtrl.controller = function( $scope, $element ) {
-			
+			$scope.addThing = function () {
+				var thing = $scope.app.addThing($scope.thingName);
+				if (thing) {
+					$scope.thingName = '';
+					$scope.thing = thing;
+				}
+			}
 		};
 
 		return ThingsDirCtrl;

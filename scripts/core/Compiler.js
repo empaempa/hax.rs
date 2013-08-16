@@ -57,7 +57,6 @@ define( [
 						"this.main = new Main();\n\t\t"+
 						"this.paused = false;\n\t\t"+
 						"this.raf = null;\n\t\t"+
-						"this.update();\n\t"+
 					"}\n\t"+
 			//		"App.prototype.update = function() {\n\t\t"+
 			//			"this.main.update();\n\t\t"+

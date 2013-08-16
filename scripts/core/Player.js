@@ -50,7 +50,11 @@ define([
 
 			this.startTime = helpers.now();
 
+			
 			this.program = helpers.construct(runable, this.toolchain);
+			this.program.update();
+		} else {
+
 		}
 	};
 

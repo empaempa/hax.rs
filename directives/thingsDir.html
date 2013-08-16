@@ -1,5 +1,10 @@
 Things in {{ name }}: <select ng-model="thing" ng-options="t.name for t in things"></select>
-	
+
+<form ng-submit="addThing()">
+	<input type="text" ng-model="thingName" size="30" placeholder="Add new thing">
+	<input class="btn-primary" type="submit" value="add">
+</form>
+<br>
 
 <thing></thing>
 
@@ -10,4 +15,4 @@ Things in {{ name }}: <select ng-model="thing" ng-options="t.name for t in thing
 	</li>
 	
 </ul>-->
-<textarea cols=80 rows=50>{{app.nativeCode}}</textarea>
+<textarea cols=80 rows=30>{{app.nativeCode}}</textarea>
