@@ -16,6 +16,7 @@ define( [
 			if( this.parameters.indexOf( name ) === -1 ) {
 				this.parameters.push( name );
 			}
+			return this;
 		};
 
 		Method.prototype.setCode = function( code ) {

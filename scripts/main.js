@@ -32,9 +32,8 @@ require( [
 	"controllers/PlayerDirCtrl",
 
 	"core/App",
-	"json!config",
-	"tools/Draw" ],
-	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, config, Draw ) {
+	"json!config"],
+	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, config ) {
 		"use strict";
 
     	angular.element( document ).ready( function() {
@@ -49,11 +48,11 @@ require( [
 			// just add some working code
 
 			app.getThing( "Main" ).getMethod( "construct" ).code = "min.gubbe = ny Gubbe();";
-			app.getThing( "Main" ).getMethod( "update"    ).code = "min.gubbe.hoppa();";
+			app.getThing( "Main" ).getMethod( "update"    ).code = "min.gubbe.hoppa(deltaTime);";
 
 			app.addThing( "Gubbe" );
-			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;\nrita.rektangel(10,20,30,40);";
-			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).code = "mitt.a++;";
+			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;";
+			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).addParameter( "t" ).code = "mitt.a += 0.1;\nrita.rensa();\nrita.rektangel(mus.x-25,mus.y-25,50,50);\nrita.rektangel(Math.cos(t/100)*30+30,Math.sin(t/100)*30+30,30,30);";
 			
 			//console.log(app.nativeCode);
 

@@ -13,7 +13,7 @@ define( [
 
 	Tool.prototype.translate = function () {
 		if (this.constructor.translated) {
-			console.log("Skipping translate of", this.constructor.name);
+			//console.log("Skipping translate of", this.constructor.name);
 			return;
 		}
 
@@ -27,6 +27,9 @@ define( [
 
 		this.constructor.translated = true;
 	};
+	Tool.prototype.destroy = function() {};
+	Tool.prototype.pause = function() {};
+	Tool.prototype.play = function() {};
 	
 	Tool.translateAll = function () {
 		for (var i = 0; i < tools.length; i++) {

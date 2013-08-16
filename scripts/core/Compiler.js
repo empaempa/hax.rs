@@ -1,8 +1,9 @@
 define( [
 	"json!config",
-	"core/Locale!"
+	"core/Locale!",
+	"tools/Tool"
 ],
-	function( config, Locale ) {
+	function( config, Locale, Tool ) {
 		"use strict";
 
 		var Compiler = {};
@@ -47,18 +48,35 @@ define( [
 				}
 			}
 
-			nativeCode  = "'use strict';\ntry {(function () {\n\t"+toolDeclaration+"\n\tfunction App( "+toolParameters+" ) {\n\t\t"+toolAssignment+"\n\t\tthis.main = new Main();\n\t\tthis.update();\n\t}\n\tApp.prototype.update = function() {\n\t\tthis.main.update();\n\t\trequestAnimationFrame( this.update.bind( this ) );\n\t};\n";
+			nativeCode  =
+				"(function () {\n\t"+
+					"'use strict';\n\t"+
+					""+toolDeclaration+"\n\t"+
+					"function App( "+toolParameters+" ) {\n\t\t"+
+						""+toolAssignment+"\n\t\t"+
+						"this.main = new Main();\n\t\t"+
+						"this.paused = false;\n\t\t"+
+						"this.raf = null;\n\t\t"+
+						"this.update();\n\t"+
+					"}\n\t"+
+			//		"App.prototype.update = function() {\n\t\t"+
+			//			"this.main.update();\n\t\t"+
+			//			"requestAnimationFrame( this.update.bind( this ) );\n\t"+
+			//		"};\n\t"+
+					"\n";
 
 			for( var thing in app.things ) {
 				nativeCode += app.things[ thing ].getNativeCode();
 			}
 
-			nativeCode += "\treturn App;\n}()); } catch (e) {console.error(e)}";
+			nativeCode +=
+					"\treturn App;\n"+
+				"}());";
 			app.nativeCode = nativeCode;
 			try {
 				var runable = eval( nativeCode );
 			} catch (e) {
-				console.log(typeof e.stack, e.stack);
+				alert(e.stack.split("\n")[0]);
 			}
 			
 			return runable;
