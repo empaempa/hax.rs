@@ -70,8 +70,9 @@ req( [
 
 
 		var self = this;
-		req([ "text!locale/"+language+".json" ], function ( table ) {
-			self.setTranslateTable( JSON.parse(table) );
+		req([ "json!locale/"+language+".json" ], function ( table ) {
+			console.log(table);
+			self.setTranslateTable( table );
 		});
 
 	};

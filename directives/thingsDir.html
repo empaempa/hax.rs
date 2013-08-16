@@ -1,6 +1,6 @@
-Things in {{ name }}:
+Things in {{ name }}: <select ng-model="thing" ng-options="t.name for t in things"></select>
+	
 
-<select ng-model="thing" ng-options="t.name for t in things"></select>
 <thing></thing>
 
 <!--<ul ng-repeat="thing in things" ng-controller="EditorCtrl.ThingCtrl">

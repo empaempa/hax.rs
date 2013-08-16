@@ -1,12 +1,17 @@
 {
 	"tools": {
+		"canvas": {
+			"name": "rityta",
+			"methods": {
+				"clear": "rensa"
+			}
+		},
 		"draw": {
 			"name": "rita",
 			"methods": {
 				"rectangle": "rektangel",
 				"line": "linje",
-				"circle": "cirkel",
-				"clear": "rensa"
+				"circle": "cirkel"
 			}
 		},
 		"mouse": {

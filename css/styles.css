@@ -1,6 +1,8 @@
 .CodeMirror {
-	width:  400px;
-	background-color: #eeeeee;
+	width:  640px;
+	height: 160px;
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
 	margin: 10px;	
 }
 

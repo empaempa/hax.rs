@@ -1,6 +1,6 @@
 <ul ng-repeat="method in thing.methods">
 	<li>
-		<div class="method-name">{{method.name}}</div>
+		{{thing.name}}'s {{method.name}} method ( {{method.parameters.join(", ")}} )<br>
 		<method-editor></method-editor>
 	</li>
 </ul>

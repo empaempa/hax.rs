@@ -51,8 +51,8 @@ require( [
 			app.getThing( "Main" ).getMethod( "update"    ).code = "min.gubbe.hoppa(deltaTime);";
 
 			app.addThing( "Gubbe" );
-			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0;";
-			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).addParameter( "t" ).code = "mitt.a += 0.1;\nrita.rensa();\nrita.rektangel(mus.x-25,mus.y-25,50,50);\nrita.rektangel(Math.cos(t/100)*30+30,Math.sin(t/100)*30+30,30,30);";
+			app.getThing( "Gubbe" ).getMethod( "construct" ).code = "mitt.a = 0; min.färg = \"orange\"";
+			app.getThing( "Gubbe" ).addMethod( "hoppa"     ).addParameter( "t" ).code = "mitt.a += 0.1;\nrityta.rensa('red');\nrita.rektangel(mus.x-25,mus.y-25,50,50, \"pink\");\nrita.rektangel(Math.cos(t/100)*30+30,Math.sin(t/100)*30+30,30,30, min.färg);";
 			
 			//console.log(app.nativeCode);
 

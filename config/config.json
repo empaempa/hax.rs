@@ -2,5 +2,5 @@
 	"locale": {
 		"language": "se"
 	},
-	"tools": ["Draw", "Mouse"]
+	"tools": ["Canvas", "Draw", "Mouse"]
 }
