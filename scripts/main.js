@@ -65,12 +65,6 @@ require( [
 				}
 			);
 
-			// Configuring $translateProvider
-			/*haxrs.config(['$translateProvider', function ($translateProvider) {
-				// Simply register translation table as object hash
-				$translateProvider.translations(config.locale.table.content);
-			}]);*/
-
 			haxrs.directive("things", ThingsDirCtrl);
 			haxrs.directive("thing", ThingDirCtrl);
 			haxrs.directive("methodEditor", MethodDirCtrl);
