@@ -16,11 +16,23 @@ define( [
 
 		// EditorCtrl controllers
 
-		EditorCtrl.appController = function( $scope, app ) {
+		EditorCtrl.appController = function( $scope, app, angularFireAuth ) {
+			
+			//var root = new Firebase(config.firebase);
+			//var auth = angularFireAuth(root);
+			angularFireAuth.initialize(config.firebase);
 			$scope.name   = app.name || "MyCoolApp!";
 			
 			$scope.things = app.thingsAsArray;
 			$scope.thing = app.thingsAsArray[0];
+
+			$scope.session = {
+				user: {
+					email: '',
+					password: '',
+					id: -1
+				}
+			};
 
 			$scope.app = app;
 			$scope.config = config;
@@ -45,7 +57,12 @@ define( [
 				Locale.onLocaleLoaded.addOnce($scope.safeApply.bind(this));
 				Locale.setLanguage($scope.language);
 				$scope.language = config.locale.languages[$scope.language];
-
+			};
+			$scope.addUser = function ($element) {
+				angularFireAuth.createUser($scope.session.user.email, $scope.session.user.password, function (user) {
+					console.log(user);
+				});
+				$scope.session.user.password = '';
 			};
 		};
 

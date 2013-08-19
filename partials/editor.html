@@ -1,3 +1,8 @@
+<form ng-submit="addUser()">
+	<input type="email" name="email" ng-model="session.user.email">
+	<input type="password" name="password" ng-model="session.user.password">
+	<button type="submit">{{i18n('editor.Add')}}</button>
+</form>
 <div style="float: right">
 	<player></player>
 </div>

@@ -2,7 +2,7 @@ require.config({
 	paths: {
 		jquery  : "libs/jquery",
 		angular : "libs/angular",
-		angularfire : "libs/angularfire.min",
+		angularfire : "libs/angularFire",
 		//cm 		: "libs/cm/codemirror",
 		signals : "libs/signals.min",
 		text    : "libs/require.text",

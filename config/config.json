@@ -7,5 +7,6 @@
 		"language": "sv",
 		"table": {}
 	},
-	"tools": ["Canvas", "Draw", "Mouse"]
+	"tools": ["Canvas", "Draw", "Mouse"],
+	"firebase": "https://haxrs.firebaseio.com/"
 }
