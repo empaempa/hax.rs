@@ -2,6 +2,7 @@ require.config({
 	paths: {
 		jquery  : "libs/jquery",
 		angular : "libs/angular",
+		angularfire : "libs/angularfire.min",
 		//cm 		: "libs/cm/codemirror",
 		signals : "libs/signals.min",
 		text    : "libs/require.text",
@@ -13,7 +14,8 @@ require.config({
 		config  : "../config/config.json"
 	},
 	shim: {
-		angular : { "exports" : "angular" }
+		angular : { "exports" : "angular" },
+		angularfire : ["angular"]
 	},
 	priority: [
 		"angular"
@@ -32,7 +34,10 @@ require( [
 
 	"core/App",
 	"core/Locale!",
-	"json!config"],
+	"json!config",
+
+	//Lazy load plugins
+	"angularfire"],
 	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, Locale, config ) {
 		"use strict";
 
@@ -40,7 +45,7 @@ require( [
 
 			// create module, editor and app
 
-			var haxrs  = angular.module( "haxrs", [] );
+			var haxrs  = angular.module( "haxrs", ['firebase'] );
 			var editor = new EditorCtrl();
 			var app    = new App();
 			haxrs.value( "app", app );
