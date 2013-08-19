@@ -13,8 +13,7 @@ require.config({
 		config  : "../config/config.json"
 	},
 	shim: {
-		angular : { "exports" : "angular" },
-		//cm      : { "exports" : "CodeMirror" }
+		angular : { "exports" : "angular" }
 	},
 	priority: [
 		"angular"
@@ -32,15 +31,16 @@ require( [
 	"controllers/PlayerDirCtrl",
 
 	"core/App",
+	"core/Locale!",
 	"json!config"],
-	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, config ) {
+	function( $, angular, EditorCtrl, ThingsDirCtrl, ThingDirCtrl, MethodDirCtrl, PlayerDirCtrl, App, Locale, config ) {
 		"use strict";
 
-    	angular.element( document ).ready( function() {
+		angular.element( document ).ready( function() {
 
-    		// create module, editor and app
+			// create module, editor and app
 
-    		var haxrs  = angular.module( "haxrs", [] );
+			var haxrs  = angular.module( "haxrs", [] );
 			var editor = new EditorCtrl();
 			var app    = new App();
 			haxrs.value( "app", app );
@@ -65,6 +65,12 @@ require( [
 				}
 			);
 
+			// Configuring $translateProvider
+			/*haxrs.config(['$translateProvider', function ($translateProvider) {
+				// Simply register translation table as object hash
+				$translateProvider.translations(config.locale.table.content);
+			}]);*/
+
 			haxrs.directive("things", ThingsDirCtrl);
 			haxrs.directive("thing", ThingDirCtrl);
 			haxrs.directive("methodEditor", MethodDirCtrl);
@@ -72,6 +78,6 @@ require( [
 			
 
 			angular.bootstrap( document, [ 'haxrs' ] );
-    	} );
+    	});
 	}
 );

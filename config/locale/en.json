@@ -1,0 +1,20 @@
+{
+	"tools": {
+		
+	},
+	"content": {
+		"editor": {
+			"ThingsIn": "Things in",
+			"AddThing": "Add new thing",
+			"RemoveThing": "Remove thing",
+			"RenameThing": "Rename thing",
+			"Add": "Add",
+			"Remove": "Remove",
+			"AddMethod": "Add method",
+			"RemoveMethod": "Remove method"
+		}
+	},
+	"core": {
+		
+	}
+}

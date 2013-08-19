@@ -18,6 +18,10 @@ define( [
 			}
 			return this;
 		};
+		Method.prototype.removeParameter = function( name ) {
+			var index = this.parameters.indexOf( name );
+			this.parameters.splice( index, 1 );
+		};
 		
 		Method.prototype.setCode = function( code ) {
 			this.code = code;

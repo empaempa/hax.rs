@@ -21,6 +21,18 @@
 			}
 		}
 	},
+	"content": {
+		"editor": {
+			"ThingsIn": "Saker i",
+			"AddThing": "Lägg till ny sak",
+			"RemoveThing": "Ta bort sak",
+			"RenameThing": "Byt namn på sak",
+			"Add": "Lägg till",
+			"Remove": "Ta bort",
+			"AddMethod": "Lägg till metod",
+			"RemoveMethod": "Ta bort metod"
+		}
+	},
 	"core": {
 		"var": "låda",
 		"for": "för",

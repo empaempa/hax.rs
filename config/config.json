@@ -1,6 +1,11 @@
 {
 	"locale": {
-		"language": "se"
+		"languages": {
+			"en": "English",
+			"sv": "Swedish"
+		},
+		"language": "sv",
+		"table": {}
 	},
 	"tools": ["Canvas", "Draw", "Mouse"]
 }
