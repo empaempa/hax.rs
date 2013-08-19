@@ -1,0 +1,36 @@
+{
+	"users": {
+
+		"0": {
+			"name": "Daniel Jönsson",
+			"projects": [
+				""
+			],
+		},
+
+		"1": {
+			"name": "Mikael Emtinger",
+			"projects": {
+				"tetris": {
+					"things": {
+						"nameOfThing": {
+							"extends": "ObjectOrNameOfOtherThing",
+							"methods": {
+								"nameOfMethod": {
+									"parameters": "a,b,c",
+									"code": ""
+								}
+							}
+						}
+					},
+					"editors": {
+						"0": true,
+						"1": true
+					}
+				}
+			}
+		}
+	}
+}
+
+
