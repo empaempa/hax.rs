@@ -5,9 +5,7 @@
 			"name": "Daniel Jönsson",
 			"projects": [
 				""
-
 			],
-
 		},
 
 		"1": {
@@ -15,11 +13,11 @@
 			"projects": {
 				"tetris": {
 					"things": {
-						"Main": {
-							"extends": "Object",
+						"nameOfThing": {
+							"extends": "ObjectOrNameOfOtherThing",
 							"methods": {
-								"construct": {
-									"parameters": [ "a", "b" ],
+								"nameOfMethod": {
+									"parameters": "a,b,c",
 									"code": ""
 								}
 							}
