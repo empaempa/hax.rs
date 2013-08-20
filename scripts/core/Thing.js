@@ -11,6 +11,9 @@ define( [
 
 			this.addConstructor();
 		}
+		Thing.prototype.toJSON = function() {
+			return {};
+		};
 
 		Thing.prototype.doesMethodExist = function( name ) {
 			return this.methods[ name ] !== undefined;

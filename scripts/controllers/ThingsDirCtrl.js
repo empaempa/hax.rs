@@ -31,7 +31,7 @@ define([
 			var thing = $scope.app.addThing($scope.thingName);
 			if (thing) {
 				$scope.thingName = '';
-				$scope.thing = thing;
+				$scope.things[thing.name] = thing;
 			}
 		}
 
