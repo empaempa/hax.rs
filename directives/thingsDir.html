@@ -1,7 +1,6 @@
 Change language: <select ng-change="changeLanguage()" ng-model="language" ng-options="code for (code, code) in config.locale.languages"></select><br>
 <br>
 
-
 {{i18n('editor.ThingsIn')}} {{ name }}: <select ng-model="thing" ng-options="t.name for t in things"></select>
 
 <form ng-submit="addThing()">
