@@ -1,14 +1,11 @@
-
+<strong>{{thing.name}}</strong><br>
 {{i18n('editor.RenameThing')}}: <input type="text" ng-model="thing.name" ng-disabled="thing.name == 'Main'">
-<br>
 <button ng-click="removeThing()" ng-disabled="thing.name == 'Main'">{{i18n('editor.RemoveThing')}}</button>
-<br>
-<br>
-<form ng-submit="addMethod()">
+<form ng-submit="addMethod()" style="display: inline-block">
 	<input type="text" ng-model="methodName" size="30" placeholder="{{i18n('editor.AddMethod')}}">
 	<input class="btn-primary" type="submit" value="{{i18n('editor.Add')}}">
 </form>
 
-<ul ng-repeat="method in thing.methods">
-	<li><method-editor></method-editor></li>
+<ul>
+	<li ng-repeat="method in thing.methods"><method-editor class="method"></method-editor></li>
 </ul>

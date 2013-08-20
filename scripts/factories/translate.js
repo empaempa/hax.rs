@@ -15,7 +15,7 @@ define([
 					out = out[keys[i]];
 				}
 				if (typeof out === "undefined") {
-					out = "{{translation of "+key+" failed)}}";
+					out = "{{translation of "+key+" failed}}";
 					console.warn("Translation of "+key+" failed ("+config.locale.language+")");
 				}
 				return out;

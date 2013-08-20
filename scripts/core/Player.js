@@ -15,6 +15,10 @@ define([
 		this.program = null;
 		this.startTime = 0;
 		this.pauseTime = 0;
+
+		this.pixelRatio = window.devicePixelRatio || 1;
+		this.canvas.width *= this.pixelRatio;
+		this.canvas.height *= this.pixelRatio;
 	}
 
 	Player.prototype.run = function() {

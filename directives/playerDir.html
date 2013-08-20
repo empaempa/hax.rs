@@ -1,5 +1,5 @@
-<button ng-click="player.toggleRun()">{{player.program && "Stop" || "Run"}}</button>
-<button ng-click="player.togglePause()" ng-disabled="!player.program">{{player.program.paused && "Resume" || "Pause"}}</button>
+<button ng-click="player.toggleRun()">{{player.program && i18n('editor.Stop') || i18n('editor.Run')}}</button>
+<button ng-click="player.togglePause()" ng-disabled="!player.program">{{player.program.paused && i18n('editor.Resume') || i18n('editor.Pause')}}</button>
 <br>
 <div class="player-elements"></div>
-<canvas class="player-canvas" width=640 height=960 style="width: 320px; height: 480px; border: 5px solid black;"></canvas>
+<canvas class="player-canvas" width=320 height=480></canvas>

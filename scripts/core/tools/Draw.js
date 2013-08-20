@@ -7,6 +7,7 @@ define( [
 			Tool.call(this);
 			this.canvas = player.canvas;
 			this.ctx = player.ctx;
+			this.pixelRatio = player.pixelRatio;
 		}
 		Draw.translated = false;
 		Draw.prototype = Object.create(Tool.prototype);
@@ -19,15 +20,12 @@ define( [
 				this.ctx.fillStyle = color;
 			}
 			
-			this.ctx.fillRect(x*2, y*2, w*2, h*2);
+			this.ctx.fillRect(x*this.pixelRatio, y*this.pixelRatio, w*this.pixelRatio, h*this.pixelRatio);
 
 			if (color) {
 				this.ctx.restore();
 			}
 		}
-		Draw.prototype.clear = function() {
-			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		};
 
 		
 

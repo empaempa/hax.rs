@@ -30,7 +30,11 @@
 			"Add": "Lägg till",
 			"Remove": "Ta bort",
 			"AddMethod": "Lägg till metod",
-			"RemoveMethod": "Ta bort metod"
+			"RemoveMethod": "Ta bort metod",
+			"Run": "Kör",
+			"Stop": "Stopp",
+			"Pause": "Pausa",
+			"Resume": "Fortsätt"
 		}
 	},
 	"core": {

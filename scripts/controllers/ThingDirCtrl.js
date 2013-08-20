@@ -18,9 +18,9 @@ define([
 	ThingDirCtrl.controller = function( $scope, $element ) {
 		$scope.removeThing = function () {
 			var thing = $scope.thing;
-			var pos = $scope.things.indexOf(thing);
+			//var pos = $scope.things.indexOf(thing);
 			$scope.app.removeThing(thing.name);
-			$scope.thing = $scope.things[Math.min(pos, $scope.things.length-1)];
+			//$scope.thing = $scope.things[Math.min(pos, $scope.things.length-1)];
 		}
 
 		$scope.addMethod = function () {

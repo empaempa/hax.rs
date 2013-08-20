@@ -6,7 +6,7 @@ define( [
 
 		function App() {
 			this.things = {};
-			this.thingsAsArray = [];
+			//this.thingsAsArray = [];
 			this.nativeCode = "";
 			this.addMainThing();
 		}
@@ -30,7 +30,7 @@ define( [
 			}
 			var thing = new Thing( { name: name } );
 			this.things[ name ] = thing;
-			this.thingsAsArray.push( thing );
+			//this.thingsAsArray.push( thing );
 			return thing;
 		};
 
@@ -49,7 +49,16 @@ define( [
 				return;
 			}
 			var thing = this.things[name];
-			this.thingsAsArray.splice(this.thingsAsArray.indexOf(thing), 1);
+			//this.thingsAsArray.splice(this.thingsAsArray.indexOf(thing), 1);
+			delete this.things[name];
+		};
+		App.prototype.renameThing = function( name, newName ) {
+			if( !this.doesThingExists( name )) {
+				console.error( "App.renameThing: no " + name + " available" );
+				return;
+			}
+			var thing = this.things[name];
+			this.things[newName] = thing;
 			delete this.things[name];
 		};
 

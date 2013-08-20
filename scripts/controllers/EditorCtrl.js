@@ -25,8 +25,7 @@ define( [
 			$scope.registerForm = {};
 			$scope.loginForm = {};
 
-			$scope.things = app.thingsAsArray;
-			$scope.thing = app.thingsAsArray[0];
+			$scope.things = app.things;
 
 			$scope.app = app;
 			$scope.config = config;
@@ -43,13 +42,15 @@ define( [
 			};
 
 			$scope.login = function () {
-				var smth = angularFireAuth.login("password", {email: $scope.loginForm.email, password: $scope.loginForm.password});
+				angularFireAuth.login("password", {email: $scope.loginForm.email, password: $scope.loginForm.password}).then(function (user) {
+					console.log(user);
+				}, function (err) {
+					console.log("Login unsuccessful: "+err);
+				});
 				$scope.loginForm.password = '';
-				smth.then(function (user) {console.log(user)}, function (err) {console.error(err)});
 			};
 
 			$scope.logout = function () {
-				console.log($scope.user);
 				angularFireAuth.logout();
 			};
 
@@ -60,7 +61,7 @@ define( [
 				$scope.registerForm.password = '';
 			};
 		};
-
+		
 		return EditorCtrl;
 	}
 );

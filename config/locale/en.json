@@ -11,7 +11,11 @@
 			"Add": "Add",
 			"Remove": "Remove",
 			"AddMethod": "Add method",
-			"RemoveMethod": "Remove method"
+			"RemoveMethod": "Remove method",
+			"Run": "Run",
+			"Stop": "Stop",
+			"Pause": "Pause",
+			"Resume": "Resume"
 		}
 	},
 	"core": {
