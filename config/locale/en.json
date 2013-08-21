@@ -4,6 +4,7 @@
 	},
 	"content": {
 		"editor": {
+			"Things": "Things",
 			"ThingsIn": "Things in",
 			"AddThing": "Add new thing",
 			"RemoveThing": "Remove thing",

@@ -1,24 +1,3 @@
 <topbar class="topbar"></topbar>
 <player class="player"></player>
-<strong>hax.rs</strong><br>
-<br>
-{{thin}}
-
-<button ng-click="pusher()">PUSH</button>
-
-<form ng-submit="addUser()">
-	Create user: <input type="email" name="email" ng-model="registerForm.email" placeholder="username">
-	<input type="password" name="password" ng-model="registerForm.password" placeholder="password">
-	<button type="submit">{{i18n('editor.Add')}}</button>
-</form>
-<form ng-submit="login()">
-	Log in: <input type="email" name="email" ng-model="loginForm.email" placeholder="username">
-	<input type="password" name="password" ng-model="loginForm.password" placeholder="password">
-	<button type="submit">Login</button>
-</form>
-<button ng-click="logout()">Logout</button>
-
-{{user.id}}
-
-<hr>
 <things class="things"></things>

@@ -9,6 +9,21 @@ body {
 	float: right;
 }
 
+.center {
+	text-align: center;
+	margin: auto;
+}
+
+.separator {
+	margin: 5px;
+	height: 1px;
+	background-color: #ddd;
+}
+
+.marginTop {
+	margin-top: 10px;
+}
+
 .CodeMirror {
 	height: auto;
 	border: 1px solid #ddd;
@@ -26,45 +41,73 @@ body {
 	top: 0;
 	right: 0;
 	position: fixed;
-	background-color: #F33;
+	background-color: #444444;
 	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-	z-index: 100;
+	z-index: 200;
 	height: 30px;
 	color: white;
 	padding: 5px;
-	border-bottom: 1px solid #c00;
 }
 
-.thinglist {
-	display: block;
+.thingList {
 	overflow: auto;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	position: absolute;
-	left: 0;
-	bottom: -16px;
-	top: 50%;
-	right: 340px;
+	left: 0px;
+	top: 40px;
+	width: 100px;
+	height: 100%;
+	background-color: white;
+	border-right: 1px solid #ddd;
+}
+
+.methodList {
+	overflow: auto;
+	left: 0px;
+	top: 0px;
+	width: 100px;
+	height: 100%;
+	background-color: white;
+	border-right: 1px solid #ddd
+}
+
+.thingList button,
+.thingList input[ type="submit"],
+.methodList button,
+.methodList input[ type="submit" ] {
+	width: 90px;
+}
+
+.thingList input[type="text"],
+.methodList input[type="text"] {
+	width: 80px;
+	text-align: center;
+}
+
+.thing {
+	overflow: auto;
+	position: absolute;
+	left: 100px;
+	top: 40px;
+	right: 400px;
+	height: 100%;
 	background-color: white;
 }
-.thing {
-	display: block;
-	margin: 10px;
-}
+
 
 .player {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	bottom: 0px;
 	right: 0px;
 	z-index: 100;
-	background-color: #F33;
+	background-color: #ffffff;
 	display: block;
-	width: 340px;
+	width: 400px;
+	box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
 }
 .player .player-wrapper {
 	position: absolute;
-	overflow: auto;
-	top: 30px;
+	top: 40px;
 	bottom: 0px;
 	left: 0;
 	right: 0;
@@ -75,4 +118,5 @@ body {
 	background-color: white;
 	display: block;
 	margin: auto;
+	box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
 }

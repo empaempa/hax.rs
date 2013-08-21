@@ -1,7 +1,8 @@
-<button ng-click="player.toggleRun()">{{player.program && i18n('editor.Stop') || i18n('editor.Run')}}</button>
-<button ng-click="player.togglePause()" ng-disabled="!player.program">{{player.program.paused && i18n('editor.Resume') || i18n('editor.Pause')}}</button>
-<br>
 <div class="player-wrapper">
 	<div class="player-elements"></div>
 	<canvas class="player-canvas" width=320 height=480></canvas>
+	<div class="center marginTop">
+		<button ng-click="player.toggleRun()">{{player.program && i18n('editor.Stop') || i18n('editor.Run')}}</button>
+		<button ng-click="player.togglePause()" ng-disabled="!player.program">{{player.program.paused && i18n('editor.Resume') || i18n('editor.Pause')}}</button>
+	</div>
 </div>

@@ -1,3 +1,24 @@
+<div class="methodList">
+	<div class="center">
+	{{i18n('editor.Methods')}}<br/>
+	{{thing.name}}
+	<div class="separator"/>
+	<div ng-repeat="method in thing.methods"><button ng-click="showMethod(method);">{{method.name}}</button></div>
+	<div class="separator"/>
+	<form ng-submit="addMethod()">
+		<input type="text" ng-model="newMethodName" placeholder="{{i18n('editor.AddMethod')}}">
+		<input type="submit" value="{{i18n('editor.Add')}}">
+	</form>
+	</div>
+</div>
+
+
+<ul>
+	<li ng-repeat="method in thing.methods"><method class="method"></method></li>
+</ul>
+
+
+<!--
 <strong>{{thing.name}}</strong><br>
 {{i18n('editor.RenameThing')}}: <input type="text" ng-model="thing.name" ng-disabled="thing.name == 'Main'">
 <button ng-click="removeThing()" ng-disabled="thing.name == 'Main'">{{i18n('editor.RemoveThing')}}</button>
@@ -5,7 +26,4 @@
 	<input type="text" ng-model="methodName" size="30" placeholder="{{i18n('editor.AddMethod')}}">
 	<input class="btn-primary" type="submit" value="{{i18n('editor.Add')}}">
 </form>
-
-<ul>
-	<li ng-repeat="method in thing.methods"><method-editor class="method"></method-editor></li>
-</ul>
+-->

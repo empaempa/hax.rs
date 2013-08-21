@@ -7,25 +7,31 @@ define([
 
 	function ThingsDirCtrl() {
 		var directiveDefinitionObject = {
-			template: template,
-			restrict: 'E',
+			template: 	template,
+			restrict: 	'E',
 			controller: ThingsDirCtrl.controller
 		};
 
 		return directiveDefinitionObject;
 	}
 
-
-	ThingsDirCtrl.controller = function( $scope, $element ) {
+	ThingsDirCtrl.controller = function ( $scope, $element ) {
 		$scope.addThing = function () {
-			var thing = $scope.app.addThing($scope.thingName);
+			var thing = $scope.app.addThing( $scope.newThingName );
 			if (thing) {
-				$scope.thingName = '';
-				$scope.things[thing.name] = thing;
-				$scope.$emit("fbSet", "/things/"+thing.name+"/", JSON.parse(JSON.stringify(thing)));
+				$scope.newThingName         = "";
+				$scope.things[ thing.name ] = thing;
+				$scope.$emit( "fbSet", "/things/" + thing.name + "/", JSON.parse( JSON.stringify( thing )));
+			} else {
+				alert( "Already exists!" );
 			}
 		}
-		
+
+		$scope.showThing = function ( thing ) {
+			$scope.thing = thing;
+		}
+
+		$scope.thing = $scope.app.things.Main;
 	};
 
 	haxrs.directive("things", ThingsDirCtrl);

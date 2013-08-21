@@ -1,13 +1,24 @@
 {{i18n('editor.ThingsIn')}} {{ name }}: <!--<select ng-model="thing" ng-options="t.name for t in things"></select>-->
 
-<form ng-submit="addThing()">
-	<input type="text" ng-model="thingName" size="30" placeholder="{{i18n('editor.AddThing')}}">
-	<input class="btn-primary" type="submit" value="{{i18n('editor.Add')}}">
-</form>
 
-<ul class="thinglist">
+<!--<ul class="thinglist">
 	<li ng-repeat="thing in things"><thing class="thing"></thing></li>
-</ul>
+</ul>-->
+
+<thing class="thing"></thing>
+<div class="thingList">
+	<div class="center">
+	{{i18n('editor.ThingsIn')}}<br/>
+	{{app.name}}
+	<div class="separator"/>
+	<div ng-repeat="thing in things"><button ng-click="showThing(thing);">{{thing.name}}</button></div>
+	<div class="separator"/>
+	<form ng-submit="addThing()">
+		<input type="text" ng-model="newThingName" placeholder="{{i18n('editor.AddThing')}}">
+		<input type="submit" value="{{i18n('editor.Add')}}">
+	</form>
+	</div>
+</div>
 
 <!--<ul ng-repeat="thing in things" ng-controller="EditorCtrl.ThingCtrl">
 	<li>

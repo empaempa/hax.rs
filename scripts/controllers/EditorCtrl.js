@@ -45,8 +45,8 @@ define( [
 			});*/
 			fb.child("a").on('value', function (data) {
 				console.log("DATABASE UPDATE");
-				app.fromJSON(data.val());
-				$scope.safeApply();
+				//app.fromJSON(data.val());
+				//$scope.safeApply();
 			});
 			
 			$scope.$on('fbSet', function (e, path, data) {

@@ -56,7 +56,7 @@ define( [
 		
 		Method.prototype.setCode = function( code ) {
 			if (this.code !== code) {
-				this.code = code;
+				this.code = code || "";
 
 				if (this.editor) {
 					this.editor.setValue(this.code);

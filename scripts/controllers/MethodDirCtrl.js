@@ -21,10 +21,9 @@ define([
 		var editorElement = $element.find( ".cm" )[ 0 ];
 		
 		var editor = CodeMirror( editorElement, {
-			value:  method.code,
+			value:  method.code || "",
 			mode:   "javascript",
 			indent: true,
-			lineNumbers: true,
 			matchBrackets: true,
 			indentWithTabs: true
 		} );
@@ -38,5 +37,5 @@ define([
 
 	};
 
-	haxrs.directive("methodEditor", MethodDirCtrl);
+	haxrs.directive("method", MethodDirCtrl);
 });
