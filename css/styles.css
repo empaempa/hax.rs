@@ -5,6 +5,10 @@ body {
 	overflow: hidden;
 }
 
+.right {
+	float: right;
+}
+
 .CodeMirror {
 	height: auto;
 	border: 1px solid #ddd;
@@ -16,15 +20,6 @@ body {
   overflow-x: auto;
 }
 
-#player {
-	position: absolute;
-	top: 0px;
-	left: 410px;
-	width: 320px;
-	height: 480px;
-	background-color: #eeeeee;
-	margin: 10px;
-}
 .topbar {
 	display: block;
 	left: 0;
@@ -40,10 +35,6 @@ body {
 	border-bottom: 1px solid #c00;
 }
 
-.topbar button {
-	float: right;
-}
-
 .thinglist {
 	display: block;
 	overflow: auto;
@@ -51,8 +42,9 @@ body {
 	position: absolute;
 	left: 0;
 	bottom: -16px;
-	top: 240px;
+	top: 50%;
 	right: 340px;
+	background-color: white;
 }
 .thing {
 	display: block;
@@ -66,9 +58,16 @@ body {
 	right: 0px;
 	z-index: 100;
 	background-color: #F33;
-	overflow: auto;
 	display: block;
 	width: 340px;
+}
+.player .player-wrapper {
+	position: absolute;
+	overflow: auto;
+	top: 30px;
+	bottom: 0px;
+	left: 0;
+	right: 0;
 }
 .player .player-canvas {
 	width: 320px;
@@ -76,5 +75,4 @@ body {
 	background-color: white;
 	display: block;
 	margin: auto;
-	box-shadow: 0px 0px 10px black;
 }

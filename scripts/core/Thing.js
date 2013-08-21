@@ -8,15 +8,54 @@ define( [
 			this.name       = parameters.name;
 			this.methods    = {};
 			this.nativeCode = "";
+			this.app        = parameters.app;
 
 			this.addConstructor();
 		}
 		Thing.prototype.toJSON = function() {
-			return {};
+			return {
+				name: this.name,
+				methods: this.methods
+			};
+		};
+
+		Thing.prototype.fromJSON = function(json) {
+			
+			//console.log(json);
+
+			if (json.hasOwnProperty("name")) {
+				this.name = json.name;
+			}
+
+			this.nativeCode = "";
+
+			// Remove
+			for (var name in this.methods) {
+				if (!json.methods.hasOwnProperty(name)) {
+					this.removeMethod(name);
+				}
+			}
+
+			// Add/update
+			for (var name in json.methods) {
+				if (!this.doesMethodExist(name)) {
+					var m = json.methods[name];
+					if (m.type === Method.STATIC) {
+						this.addStaticMethod(name);
+					} else if (m.type === Method.CONSTRUCTOR && name === "construct") {
+						this.addConstructor();
+					} else {
+						this.addMethod(name);
+					}
+				}
+				json.methods[name].thing = this;
+				json.methods[name].name = name;
+				this.methods[name].fromJSON(json.methods[name]);
+			}
 		};
 
 		Thing.prototype.doesMethodExist = function( name ) {
-			return this.methods[ name ] !== undefined;
+			return this.methods.hasOwnProperty( name );
 		};
 
 		Thing.prototype.addConstructor = function() {
@@ -24,7 +63,7 @@ define( [
 				console.error( "Thing.addConstructor: construct already exists, not adding!" );
 			}
 
-			return this.methods[ "construct" ] = new Method( { thing: this, type: Method.CONSTRUCTOR, name: "construct", code: "this.name = 'I am " + this.name + "!'; console.log( this.name );" } );
+			return this.methods[ "construct" ] = new Method( { app: this.app, thing: this, type: Method.CONSTRUCTOR, name: "construct", code: "this.name = 'I am " + this.name + "!'; console.log( this.name );" } );
 		};
 
 		Thing.prototype.addMethod = function( name ) {
@@ -39,7 +78,7 @@ define( [
 			if ( name === "construct") {
 				return this.addConstructor();
 			}
-			this.methods[ name ] = new Method( { thing: this, type: Method.INSTANCE, name: name } );
+			this.methods[ name ] = new Method( { app: this.app, thing: this, type: Method.INSTANCE, name: name } );
 			return this.methods[ name ];
 		};
 
@@ -53,7 +92,7 @@ define( [
 				return;
 			}
 
-			this.methods[ name ] = new Method( { thing: this, type: Method.STATIC, name: name } );
+			this.methods[ name ] = new Method( { app: this.app, thing: this, type: Method.STATIC, name: name } );
 		};
 
 		Thing.prototype.getMethod = function( name ) {

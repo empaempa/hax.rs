@@ -5,11 +5,13 @@ define( [
 		"use strict";
 
 		function Method( parameters ) {
+			this.app        = parameters.app;
 			this.thing      = parameters.thing;
 			this.name       = parameters.name;
 			this.type       = parameters.type || Method.INSTANCE;
 			this.parameters = [];
 			this.code       = parameters.code || "";
+			this.editor = null;
 		}
 		Method.prototype.toJSON = function () {
 			return {
@@ -18,6 +20,27 @@ define( [
 				parameters: this.parameters,
 				code: this.code
 			};
+		};
+
+		Method.prototype.fromJSON = function( json ) {
+
+			
+			this.thing = json.thing;
+			this.name = json.name;
+			this.type = json.type;
+			this.setCode( json.code );
+
+
+			this.parameters.length = 0;
+			if (Array.isArray(json.parameters)) {
+				for (var i = 0; i < json.parameters.length; i++) {
+					this.parameters.push(json.parameters[i]);
+				}
+			}
+		};
+
+		Method.prototype.doesParameterExist = function( name ) {
+			return this.parameters.indexOf( name ) !== -1;
 		};
 
 		Method.prototype.addParameter = function( name ) {
@@ -32,7 +55,13 @@ define( [
 		};
 		
 		Method.prototype.setCode = function( code ) {
-			this.code = code;
+			if (this.code !== code) {
+				this.code = code;
+
+				if (this.editor) {
+					this.editor.setValue(this.code);
+				}
+			}
 		};
 
 		Method.prototype.getCode = function() {
