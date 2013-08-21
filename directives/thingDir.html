@@ -15,7 +15,7 @@
 <!--<method class="method"/>-->
 
 
-<ul>
+<ul ng-repeat="thing in things" ng-show="thing.name == currentThing">
 	<li ng-repeat="method in thing.methods"><method class="method"></method></li>
 </ul>
 

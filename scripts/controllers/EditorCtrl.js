@@ -37,14 +37,14 @@ define( [
 			$scope.registerForm = {};
 			$scope.loginForm = {};
 
-			var fb = new Firebase(config.firebase+"things");
-			$scope.firebase = fb;
+
+			$scope.firebase = config.fb;
 
 			/*var promise = angularFire(fb, $scope, "thin", {});
 			promise.then(function () {
 
 			});*/
-			fb.child("a").on('value', function (data) {
+			config.fb.child("a").on('value', function (data) {
 				//console.log("DATABASE UPDATE");
 				//console.log(data.val());
 				app.fromJSON(data.val());
@@ -53,13 +53,13 @@ define( [
 			
 			$scope.$on('fbSet', function (e, path, data) {
 				console.log(path, data);
-				fb.child("a"+path).set(data);
+				config.fb.child("a"+path).set(data);
 			});
 			$scope.$on('fbUpdate', function (e, path, data) {
-				fb.child("a"+path).update(data);
+				config.fb.child("a"+path).update(data);
 			});
 			$scope.$on('fbRemove', function (e, path) {
-				fb.child("a"+path).remove();
+				config.fb.child("a"+path).remove();
 			});
 			
 			

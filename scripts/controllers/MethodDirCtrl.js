@@ -20,6 +20,7 @@ define([
 		var method        = $scope.method;
 		var editorElement = $element.find( ".cm" )[ 0 ];
 		
+
 		var editor = CodeMirror( editorElement, {
 			mode:   "javascript",
 			indent: true,
@@ -27,25 +28,17 @@ define([
 			indentWithTabs: true
 		} );
 
-		var firepad = Firepad.fromCodeMirror($scope.firebase.child("a"+"/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
-		method.firepad = firepad;
+		method.editor = editor;
+		
 
-		/*editor.on( "change", function(inst, changeObj) {
-			method.code = editor.getValue();
-			
-			if (changeObj.origin !== "setValue") {
-				console.log("CHANGED", arguments);
-				$scope.$emit("fbSet", "/things/"+method.thing.name+"/methods/"+method.name+"/code", method.code);
-			}
-		} );*/
-
+		var firepad = Firepad.fromCodeMirror($scope.firebase.child("a/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
 		firepad.on('ready', function () {
 			if (firepad.isHistoryEmpty()) {
 				firepad.setText(method.code || "");
 			}
 		});
-
-		method.editor = editor;
+		method.firepad = firepad;
+		
 
 		$scope.removeMethod = function () {
 			var method = $scope.method;

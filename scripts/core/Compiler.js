@@ -73,6 +73,8 @@ define( [
 				"}());";
 			app.nativeCode = nativeCode;
 
+			console.log(nativeCode);
+
 			try {
 				var runable = eval( nativeCode );
 			} catch (e) {

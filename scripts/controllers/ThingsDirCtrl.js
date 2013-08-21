@@ -16,6 +16,9 @@ define([
 	}
 
 	ThingsDirCtrl.controller = function ( $scope, $element ) {
+
+		$scope.currentThing = "Main";
+
 		$scope.addThing = function () {
 			var thing = $scope.app.addThing( $scope.newThingName );
 			if (thing) {
@@ -29,6 +32,7 @@ define([
 
 		$scope.showThing = function ( thing ) {
 			$scope.thing = thing;
+			$scope.currentThing = thing.name;
 		}
 
 		$scope.thing = $scope.app.things.Main;
