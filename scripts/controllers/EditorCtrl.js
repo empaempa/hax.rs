@@ -21,15 +21,46 @@ define( [
 			//var auth = angularFireAuth(root);
 			angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'user'});
 			
-			$scope.name = app.name || "MyCoolApp!";
+			$scope.name = app.name;
 			
+			$scope.safeApply = function(fn) {
+				var phase = this.$root.$$phase;
+				if(phase == '$apply' || phase == '$digest') {
+					if(fn && (typeof(fn) === 'function')) {
+						fn();
+					}
+				} else {
+					this.$apply(fn);
+				}
+			};
+
 			$scope.registerForm = {};
 			$scope.loginForm = {};
 
-			var promise = angularFire(config.firebase+"things", $scope, "thin", {});
+			var fb = new Firebase(config.firebase+"things");
+
+			/*var promise = angularFire(fb, $scope, "thin", {});
 			promise.then(function () {
-				
+
+			});*/
+			fb.child("a").on('value', function (data) {
+				console.log("DATABASE UPDATE");
+				app.fromJSON(data.val());
+				$scope.safeApply();
 			});
+			
+			$scope.$on('fbSet', function (e, path, data) {
+				console.log(path, data);
+				fb.child("a"+path).set(data);
+			});
+			$scope.$on('fbUpdate', function (e, path, data) {
+				fb.child("a"+path).update(data);
+			});
+			$scope.$on('fbRemove', function (e, path) {
+				fb.child("a"+path).remove();
+			});
+			
+			
 
 			$scope.app = app;
 			$scope.things = app.things;
@@ -66,7 +97,8 @@ define( [
 			};
 
 			$scope.pusher = function () {
-				$scope.thin["date"] = Date.now();
+				$scope.thin.date = Date.now();
+
 			};
 		};
 

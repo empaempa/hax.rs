@@ -20,6 +20,7 @@ define([
 			var thing = $scope.thing;
 			//var pos = $scope.things.indexOf(thing);
 			$scope.app.removeThing(thing.name);
+			$scope.$emit("fbRemove", "/things/"+thing.name+"/");
 			//$scope.thing = $scope.things[Math.min(pos, $scope.things.length-1)];
 		}
 
@@ -27,6 +28,7 @@ define([
 			var name = $scope.methodName;
 			var method = $scope.thing.addMethod( name );
 			if (method) {
+				$scope.$emit("fbSet", "/things/"+method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
 				$scope.methodName = "";
 			}
 		}

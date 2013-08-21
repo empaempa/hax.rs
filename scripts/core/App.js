@@ -1,18 +1,52 @@
 define( [
-	"core/Thing" ],
-	function( Thing ) {
+	"core/Thing",
+	"signals" ],
+	function( Thing, signals ) {
 
 		"use strict";
 
 		function App() {
 			this.things = {};
+			this.name = "";
 			//this.thingsAsArray = [];
 			this.nativeCode = "";
+			this.onChange = new signals.Signal();
 			this.addMainThing();
 		}
+		App.prototype.toJSON = function() {
+			return {
+				name: this.name,
+				things: this.things
+			};
+		};
+		App.prototype.fromJSON = function(json) {
 
-		App.prototype.doesThingExists = function( name ) {
-			return this.things[ name ] !== undefined;
+			//console.log(json);
+
+			if (json.hasOwnProperty("name")) {
+				this.name = json.name;
+			}
+
+			this.nativeCode = "";
+
+			// Add/update
+			for (var name in json.things) {
+				if (!this.doesThingExist(name)) {
+					this.addThing(name);
+				}
+				this.things[name].fromJSON(json.things[name]);
+			}
+
+			// Remove
+			for (var name in this.things) {
+				if (!json.things.hasOwnProperty(name)) {
+					this.removeThing(name);
+				}
+			}
+		};
+
+		App.prototype.doesThingExist = function( name ) {
+			return this.things.hasOwnProperty( name );
 		};
 
 		App.prototype.addMainThing = function( ) {
@@ -24,18 +58,18 @@ define( [
 				console.error("App.addThing: Invalid name");
 				return;
 			}
-			if( this.doesThingExists( name )) {
+			if( this.doesThingExist( name )) {
 				console.error( "App.addThing: Thing " + name + " already exists, not adding" );
 				return;
 			}
-			var thing = new Thing( { name: name } );
+			var thing = new Thing( { name: name, app: this } );
 			this.things[ name ] = thing;
 			//this.thingsAsArray.push( thing );
 			return thing;
 		};
 
 		App.prototype.getThing = function( name ) {
-			if( !this.doesThingExists( name )) {
+			if( !this.doesThingExist( name )) {
 				console.error( "App.getThing: no " + name + " available" );
 				return;
 			}
@@ -44,7 +78,7 @@ define( [
 		};
 
 		App.prototype.removeThing = function( name ) {
-			if( !this.doesThingExists( name )) {
+			if( !this.doesThingExist( name )) {
 				console.error( "App.removeThing: no " + name + " available" );
 				return;
 			}
@@ -53,7 +87,7 @@ define( [
 			delete this.things[name];
 		};
 		App.prototype.renameThing = function( name, newName ) {
-			if( !this.doesThingExists( name )) {
+			if( !this.doesThingExist( name )) {
 				console.error( "App.renameThing: no " + name + " available" );
 				return;
 			}

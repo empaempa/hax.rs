@@ -31,7 +31,11 @@ define([
 
 		editor.on( "change", function() {
 			method.code = editor.getValue();
+			$scope.$emit("fbSet", "/things/"+method.thing.name+"/methods/"+method.name+"/code", method.code);
 		} );
+
+		method.editor = editor;
+
 	};
 
 	haxrs.directive("methodEditor", MethodDirCtrl);
