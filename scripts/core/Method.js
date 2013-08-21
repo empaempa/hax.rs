@@ -11,6 +11,14 @@ define( [
 			this.parameters = [];
 			this.code       = parameters.code || "";
 		}
+		Method.prototype.toJSON = function () {
+			return {
+				name: this.name,
+				type: this.type,
+				parameters: this.parameters,
+				code: this.code
+			};
+		};
 
 		Method.prototype.addParameter = function( name ) {
 			if( this.parameters.indexOf( name ) === -1 ) {

@@ -15,19 +15,24 @@ define( [
 
 		// EditorCtrl controllers
 
-		EditorCtrl.appController = function( $scope, app, angularFireAuth, i18n ) {
+		EditorCtrl.appController = function( $scope, app, angularFireAuth, i18n, angularFire, angularFireCollection ) {
 			
 			//var root = new Firebase(config.firebase);
 			//var auth = angularFireAuth(root);
 			angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'user'});
-			$scope.name   = app.name || "MyCoolApp!";
+			
+			$scope.name = app.name || "MyCoolApp!";
 			
 			$scope.registerForm = {};
 			$scope.loginForm = {};
 
-			$scope.things = app.things;
+			var promise = angularFire(config.firebase+"things", $scope, "thin", {});
+			promise.then(function () {
+				
+			});
 
 			$scope.app = app;
+			$scope.things = app.things;
 			$scope.config = config;
 
 			$scope.i18n = i18n.translate;
@@ -35,7 +40,6 @@ define( [
 			$scope.language = config.locale.languages[config.locale.language];
 
 			$scope.changeLanguage = function () {
-
 				Locale.onLocaleLoaded.addOnce($scope.safeApply.bind(this));
 				Locale.setLanguage($scope.language);
 				$scope.language = config.locale.languages[$scope.language];
@@ -60,8 +64,12 @@ define( [
 				});
 				$scope.registerForm.password = '';
 			};
+
+			$scope.pusher = function () {
+				$scope.thin["date"] = Date.now();
+			};
 		};
-		
+
 		return EditorCtrl;
 	}
 );
