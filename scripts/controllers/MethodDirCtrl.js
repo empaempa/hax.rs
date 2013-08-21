@@ -36,6 +36,14 @@ define([
 
 		method.editor = editor;
 
+		$scope.removeMethod = function () {
+			var method = $scope.method;
+			//var pos = $scope.things.indexOf(thing);
+			$scope.thing.removeMethod(method.name);
+			$scope.$emit("fbRemove", "/things/"+method.thing.name+"/methods/"+method.name);
+			//$scope.thing = $scope.things[Math.min(pos, $scope.things.length-1)];
+		};
+
 	};
 
 	haxrs.directive("methodEditor", MethodDirCtrl);
