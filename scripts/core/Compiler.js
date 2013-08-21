@@ -72,6 +72,7 @@ define( [
 					"\treturn App;\n"+
 				"}());";
 			app.nativeCode = nativeCode;
+
 			try {
 				var runable = eval( nativeCode );
 			} catch (e) {

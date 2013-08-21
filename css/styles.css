@@ -93,6 +93,14 @@ body {
 	background-color: white;
 }
 
+.thing ul {
+	overflow: auto;
+	position: absolute;
+	left: 100px;
+	right: 0px;
+	top: 0px;
+
+}
 
 .player {
 	position: absolute;

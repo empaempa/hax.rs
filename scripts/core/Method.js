@@ -28,7 +28,7 @@ define( [
 			this.thing = json.thing;
 			this.name = json.name;
 			this.type = json.type;
-			this.setCode( json.code );
+			//this.setCode( json.code );
 
 
 			this.parameters.length = 0;
@@ -65,6 +65,7 @@ define( [
 		};
 
 		Method.prototype.getCode = function() {
+			this.code = this.editor.getValue();
 			if( this.type === Method.CONSTRUCTOR ) {
 				return "\tfunction " + this.thing.name + "( " + this.parameters.join( ", " ) + " ) {\n" + this.code + "\n\t};\n\n";
 			} else if( this.type === Method.INSTANCE ) {
