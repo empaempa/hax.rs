@@ -38,13 +38,15 @@ define( [
 			$scope.loginForm = {};
 
 			var fb = new Firebase(config.firebase+"things");
+			$scope.firebase = fb;
 
 			/*var promise = angularFire(fb, $scope, "thin", {});
 			promise.then(function () {
 
 			});*/
 			fb.child("a").on('value', function (data) {
-				console.log("DATABASE UPDATE");
+				//console.log("DATABASE UPDATE");
+				//console.log(data.val());
 				app.fromJSON(data.val());
 				$scope.safeApply();
 			});
