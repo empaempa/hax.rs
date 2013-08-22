@@ -1,8 +1,12 @@
 body {
 	margin: 0px;
-	padding-top: 40px;
-	height: 100%;
+	padding: 0px;
 	overflow: hidden;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 .right {
@@ -40,22 +44,31 @@ body {
 	left: 0;
 	top: 0;
 	right: 0;
-	position: fixed;
+	position: absolute;
 	background-color: #444444;
-	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	z-index: 200;
 	height: 30px;
 	color: white;
 	padding: 5px;
 }
 
+.things {
+	position: absolute;
+	top: 40px;
+	bottom: 0px;
+	left: 0px;
+	right: 400px;
+	background: red;
+}
+
 .thingList {
 	overflow: auto;
 	position: absolute;
 	left: 0px;
-	top: 40px;
+	top: 0px;
 	width: 100px;
-	height: 100%;
+	bottom: 0;
 	background-color: white;
 	border-right: 1px solid #ddd;
 }
@@ -65,9 +78,10 @@ body {
 	left: 0px;
 	top: 0px;
 	width: 100px;
-	height: 100%;
+	bottom: 0;
 	background-color: white;
-	border-right: 1px solid #ddd
+	border-right: 1px solid #ddd;
+	position: absolute;
 }
 
 .thingList button,
@@ -87,18 +101,19 @@ body {
 	overflow: auto;
 	position: absolute;
 	left: 100px;
-	top: 40px;
-	right: 400px;
-	height: 100%;
+	top: 0px;
+	right: 0px;
+	bottom: 0;
 	background-color: white;
 }
 
-.thing ul {
+.thing .thingwrapper {
 	overflow: auto;
 	position: absolute;
 	left: 100px;
 	right: 0px;
 	top: 0px;
+	bottom: 0px;
 
 }
 
@@ -108,14 +123,15 @@ body {
 	bottom: 0px;
 	right: 0px;
 	z-index: 100;
-	background-color: #ffffff;
+	background-color: #eee;
 	display: block;
 	width: 400px;
 	box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+
 }
 .player .player-wrapper {
 	position: absolute;
-	top: 40px;
+	top: 10px;
 	bottom: 0px;
 	left: 0;
 	right: 0;
@@ -126,5 +142,5 @@ body {
 	background-color: white;
 	display: block;
 	margin: auto;
-	box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 }

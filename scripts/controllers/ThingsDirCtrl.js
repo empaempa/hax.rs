@@ -1,8 +1,9 @@
 define([
+	"jquery",
 	"haxrs",
 
 	"text!directives/thingsDir.html"
-], function( haxrs, template ) {
+], function( $, haxrs, template ) {
 	"use strict";
 
 	function ThingsDirCtrl() {
@@ -15,7 +16,7 @@ define([
 		return directiveDefinitionObject;
 	}
 
-	ThingsDirCtrl.controller = function ( $scope, $element ) {
+	ThingsDirCtrl.controller = function ( $scope, $element, $timeout ) {
 
 		$scope.currentThing = "Main";
 

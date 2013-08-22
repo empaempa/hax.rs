@@ -14,10 +14,14 @@
 
 <!--<method class="method"/>-->
 
-
-<ul ng-repeat="thing in things" ng-show="thing.name == currentThing">
-	<li ng-repeat="method in thing.methods"><method class="method"></method></li>
-</ul>
+<div class="thingwrapper">
+	<ul ng-repeat="thing in things">
+		<li>
+			<strong>{{thing.name}}</strong>
+			<ul><li ng-repeat="method in thing.methods"><method class="method"></method></li></ul>
+		</li>
+	</ul>
+</div>
 
 
 <!--

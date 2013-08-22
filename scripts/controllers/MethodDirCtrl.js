@@ -15,7 +15,7 @@ define([
 		return directiveDefinitionObject;
 	}
 
-	MethodDirCtrl.controller = function( $scope, $element ) {
+	MethodDirCtrl.controller = function( $scope, $element, $timeout ) {
 
 		var method        = $scope.method;
 		var editorElement = $element.find( ".cm" )[ 0 ];
@@ -29,13 +29,21 @@ define([
 		} );
 
 		method.editor = editor;
-		
+		method.element = $element;
 
 		var firepad = Firepad.fromCodeMirror($scope.firebase.child("a/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
 		firepad.on('ready', function () {
-			if (firepad.isHistoryEmpty()) {
-				firepad.setText(method.code || "");
-			}
+			//if (firepad.isHistoryEmpty()) {
+				//firepad.setText(method.code || "");
+			//}
+			
+			method.hideable = false;
+			$scope.safeApply();
+			editor.refresh();
+			method.hideable = true;
+			
+			
+			
 		});
 		method.firepad = firepad;
 		

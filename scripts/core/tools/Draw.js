@@ -25,7 +25,20 @@ define( [
 			if (color) {
 				this.ctx.restore();
 			}
-		}
+		};
+
+		Draw.prototype.text = function(text, x, y, color) {
+			if (color) {
+				this.ctx.save();
+				this.ctx.fillStyle = color;
+			}
+
+			this.ctx.fillText(text, x*this.pixelRatio, y*this.pixelRatio);
+
+			if (color) {
+				this.ctx.restore();
+			}
+		};
 
 		
 

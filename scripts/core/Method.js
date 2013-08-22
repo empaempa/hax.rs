@@ -12,6 +12,7 @@ define( [
 		this.code       = parameters.code || "";
 		this.editor = null;
 		this.firepad = null;
+		this.element = null;
 
 		
 		

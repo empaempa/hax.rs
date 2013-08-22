@@ -16,8 +16,10 @@ define([
 	}
 
 	ThingDirCtrl.controller = function( $scope, $element ) {
+
 		$scope.showMethod = function (method) {
-			$scope.method = method;
+			//$scope.method = method;
+			method.element[0].scrollIntoView();
 		}
 
 		$scope.removeThing = function () {
@@ -38,6 +40,12 @@ define([
 				alert( "already exists!" );
 			}
 		}
+
+		$scope.testing = function (method) {
+			//console.log(method.editor);
+			
+			return true;
+		};
 
 		$scope.method = $scope.thing.methods.construct;
 	};

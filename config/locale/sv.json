@@ -11,7 +11,8 @@
 			"methods": {
 				"rectangle": "rektangel",
 				"line": "linje",
-				"circle": "cirkel"
+				"circle": "cirkel",
+				"text": "text"
 			}
 		},
 		"mouse": {
