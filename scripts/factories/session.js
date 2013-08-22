@@ -6,20 +6,47 @@ define([
 ], function (angular, haxrs, config) {
 	"use strict";
 
-	haxrs.factory("session", function () {
-		return {
-			translate: function (key) {
-				var out = config.locale.table.content;
-				var keys = key.split(".");
-				for (var i = 0; i < keys.length && typeof out !== "undefined"; i++) {
-					out = out[keys[i]];
-				}
-				if (typeof out === "undefined") {
-					out = "{{translation of "+key+" failed}}";
-					console.warn("Translation of "+key+" failed ("+config.locale.language+")");
-				}
-				return out;
+	haxrs.factory("session", function ( $location, angularFireAuth ) {
+
+		var session = {
+
+			user: null,
+			scope: null,
+
+			init: function ($scope) {
+				angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'session.user'});
+				session.scope = $scope;
+			},
+
+			login: function ($scope, form) {
+				$scope.isLoggingIn = true;
+				angularFireAuth.login("password", {email: form.email, password: form.password}).then(function (user) {
+					form.email = '';
+					$location.path("/");
+				}, function (err) {
+					$scope.isLoggingIn = false;
+					alert("Login unsuccessful\n"+err);
+				});
+				form.password = '';
+			},
+			logout: function ($scope) {
+				angularFireAuth.logout();
+				$scope.isLoggingIn = false;
+			},
+			createUser: function ($scope, form) {
+				angularFireAuth.createUser(form.email, form.password, function (user) {
+					if (user) {
+						form.email = '';
+						form.password = '';
+						$location.path("/login");
+					} else {
+						alert("Error creating user");
+					}
+					
+				});
+				
 			}
 		};
+		return session;
 	});
 });

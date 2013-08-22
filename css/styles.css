@@ -39,6 +39,7 @@ body {
   overflow-x: auto;
 }
 
+
 .topbar {
 	display: block;
 	left: 0;
@@ -53,9 +54,17 @@ body {
 	padding: 5px;
 }
 
-.things {
+#content {
 	position: absolute;
 	top: 40px;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+}
+
+.things {
+	position: absolute;
+	top: 0px;
 	bottom: 0px;
 	left: 0px;
 	right: 400px;
@@ -119,7 +128,7 @@ body {
 
 .player {
 	position: absolute;
-	top: 40px;
+	top: 0px;
 	bottom: 0px;
 	right: 0px;
 	z-index: 100;
@@ -127,6 +136,7 @@ body {
 	display: block;
 	width: 400px;
 	box-shadow: 0px 0px 30px rgba(0,0,0,0.5);
+	overflow: auto;
 
 }
 .player .player-wrapper {

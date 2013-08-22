@@ -1,3 +1,9 @@
-<img ng-click="home()" src="assets/logo.png"><div class="right"><button ng-click="login()">Log In</button><button ng-click="signup()">Sign Up</button></div>
+<img ng-click="home()" src="assets/logo.png">
+
+<div class="right">
+	<button ng-click="login()" ng-if="!session.user">Log In</button>
+	<button ng-click="logoutUser()" ng-if="session.user">Logout</button>
+	<button ng-click="signup()" ng-if="!session.user">Sign Up</button>
+</div>
 
 <!--Change language: <select ng-change="changeLanguage()" ng-model="language" ng-options="code for (code, code) in config.locale.languages"></select>-->

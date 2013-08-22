@@ -1,6 +1,10 @@
 <topbar class="topbar"></topbar>
-<form ng-submit="addUser()">
-	Login: <input type="email" name="email" ng-model="registerForm.email" placeholder="username">
-	<input type="password" name="password" ng-model="registerForm.password" placeholder="password">
-	<button type="submit">{{i18n('editor.Add')}}</button>
-</form>
+<div id="content">
+	<form ng-submit="loginUser()" ng-if="!session.user">
+		Login: <input type="email" name="email" ng-model="loginForm.email" ng-disabled="isLoggingIn" placeholder="username">
+		<input type="password" name="password" ng-model="loginForm.password" ng-disabled="isLoggingIn" placeholder="password">
+		<button type="submit">{{i18n('editor.Login')}}</button>
+	</form>
+	{{session.user.id}}
+	
+</div>

@@ -15,12 +15,14 @@ define( [
 
 		// EditorCtrl controllers
 
-		EditorCtrl.appController = function( $scope, app, angularFireAuth, i18n, angularFire, angularFireCollection ) {
+		EditorCtrl.appController = function( $scope, app, angularFireAuth, i18n, session ) {
 			
 			//var root = new Firebase(config.firebase);
 			//var auth = angularFireAuth(root);
-			angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'user'});
+			//angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'user'});
 			
+			session.init( $scope );
+
 			$scope.name = app.name;
 			
 			$scope.safeApply = function(fn) {
@@ -36,6 +38,7 @@ define( [
 
 			$scope.registerForm = {};
 			$scope.loginForm = {};
+			$scope.session = session;
 
 
 			$scope.firebase = config.fb;
@@ -78,24 +81,16 @@ define( [
 				$scope.language = config.locale.languages[$scope.language];
 			};
 
-			$scope.login = function () {
-				angularFireAuth.login("password", {email: $scope.loginForm.email, password: $scope.loginForm.password}).then(function (user) {
-					console.log(user);
-				}, function (err) {
-					console.log("Login unsuccessful: "+err);
-				});
-				$scope.loginForm.password = '';
+			$scope.loginUser = function () {
+				session.login($scope, $scope.loginForm);
 			};
 
-			$scope.logout = function () {
-				angularFireAuth.logout();
+			$scope.logoutUser = function () {
+				session.logout($scope);
 			};
 
 			$scope.addUser = function () {
-				angularFireAuth.createUser($scope.registerForm.email, $scope.registerForm.password, function (user) {
-					console.log(user);
-				});
-				$scope.registerForm.password = '';
+				session.createUser($scope, $scope.registerForm);
 			};
 
 			$scope.pusher = function () {

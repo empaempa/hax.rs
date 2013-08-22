@@ -4,6 +4,7 @@
 	},
 	"content": {
 		"editor": {
+			"Login": "Log in",
 			"Things": "Things",
 			"ThingsIn": "Things in",
 			"AddThing": "Add new thing",
