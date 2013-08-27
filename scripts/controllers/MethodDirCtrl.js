@@ -31,22 +31,20 @@ define([
 		method.editor = editor;
 		method.element = $element;
 
-		var firepad = Firepad.fromCodeMirror($scope.firebase.child("a/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
+		var firepad = Firepad.fromCodeMirror($scope.firebase.ref.child("users/"+($scope.session.user? $scope.session.user.id : "anonymous")+"/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
 		firepad.on('ready', function () {
+
 			//if (firepad.isHistoryEmpty()) {
 				//firepad.setText(method.code || "");
 			//}
 			
-			method.hideable = false;
+			/*method.hideable = false;
 			$scope.safeApply();
 			editor.refresh();
-			method.hideable = true;
-			
-			
+			method.hideable = true;*/
 			
 		});
 		method.firepad = firepad;
-		
 
 		$scope.removeMethod = function () {
 			var method = $scope.method;

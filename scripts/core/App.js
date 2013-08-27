@@ -7,11 +7,12 @@ define( [
 
 		function App() {
 			this.things = {};
-			this.name = "";
-			//this.thingsAsArray = [];
+			this.id = 1;
+			this.name = "My First App!";
+			
 			this.nativeCode = "";
-			this.onChange = new signals.Signal();
-			this.addMainThing();
+			//this.onChange = new signals.Signal();
+			//this.addMainThing();
 		}
 		App.prototype.toJSON = function() {
 			return {
@@ -22,6 +23,8 @@ define( [
 		App.prototype.fromJSON = function(json) {
 
 			//console.log(json);
+
+			if (!json) return;
 
 			if (json.hasOwnProperty("name")) {
 				this.name = json.name;

@@ -1,5 +1,6 @@
 define([
 	"factories/translate",
+	"factories/firebase",
 	"factories/session",
 
 	"controllers/ThingsDirCtrl",

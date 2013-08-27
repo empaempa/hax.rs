@@ -5,6 +5,7 @@
 		<input type="password" name="password" ng-model="loginForm.password" ng-disabled="isLoggingIn" placeholder="password">
 		<button type="submit">{{i18n('editor.Login')}}</button>
 	</form>
-	{{session.user.id}}
+	<!--<div ng-show="isLoggingIn">Logging in...</div>
+	<div ng-show="session.user">Logged in</div>-->
 	
 </div>

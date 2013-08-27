@@ -37,9 +37,6 @@ require( [
 ], function( angular, haxrs, EditorCtrl, App, Locale, config ) {
 	"use strict";
 
-	var fb = new Firebase(config.firebase+"things");
-	config.fb = fb;
-
 	var editor = new EditorCtrl();
 	var app    = new App();
 	haxrs.value( "app", app );

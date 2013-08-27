@@ -15,7 +15,7 @@
 <!--<method class="method"/>-->
 
 <div class="thingwrapper">
-	<ul ng-repeat="thing in things">
+	<ul ng-repeat="thing in app.things">
 		<li>
 			<strong>{{thing.name}}</strong>
 			<ul><li ng-repeat="method in thing.methods"><method class="method"></method></li></ul>

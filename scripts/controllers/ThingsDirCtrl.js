@@ -19,13 +19,14 @@ define([
 	ThingsDirCtrl.controller = function ( $scope, $element, $timeout ) {
 
 		$scope.currentThing = "Main";
+		//$scope.thing = $scope.app.things.Main;
 
 		$scope.addThing = function () {
 			var thing = $scope.app.addThing( $scope.newThingName );
 			if (thing) {
 				$scope.newThingName         = "";
-				$scope.things[ thing.name ] = thing;
-				$scope.$emit( "fbSet", "/things/" + thing.name + "/", JSON.parse( JSON.stringify( thing )));
+				$scope.app.things[ thing.name ] = thing;
+				$scope.$emit( "fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.id + "/things/" + thing.name, JSON.parse( JSON.stringify( thing )));
 			} else {
 				alert( "Already exists!" );
 			}
@@ -35,9 +36,8 @@ define([
 			$scope.thing = thing;
 			$scope.currentThing = thing.name;
 		}
-
-		$scope.thing = $scope.app.things.Main;
 	};
 
 	haxrs.directive("things", ThingsDirCtrl);
 });
+

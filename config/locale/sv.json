@@ -12,7 +12,8 @@
 				"rectangle": "rektangel",
 				"line": "linje",
 				"circle": "cirkel",
-				"text": "text"
+				"text": "text",
+				"line": "linje"
 			}
 		},
 		"mouse": {

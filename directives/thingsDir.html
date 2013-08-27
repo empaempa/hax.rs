@@ -13,7 +13,7 @@
 	{{i18n('editor.ThingsIn')}}<br/>
 	{{app.name}}
 	<div class="separator"/>
-	<div ng-repeat="thing in things"><button ng-click="showThing(thing);">{{thing.name}}</button></div>
+	<div ng-repeat="thing in app.things"><button ng-click="showThing(thing);">{{thing.name}}</button></div>
 	<div class="separator"/>
 	<form ng-submit="addThing()">
 		<input type="text" ng-model="newThingName" placeholder="{{i18n('editor.AddThing')}}">

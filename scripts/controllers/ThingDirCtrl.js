@@ -17,6 +17,8 @@ define([
 
 	ThingDirCtrl.controller = function( $scope, $element ) {
 
+		//$scope.method = $scope.thing.methods.construct;
+
 		$scope.showMethod = function (method) {
 			//$scope.method = method;
 			method.element[0].scrollIntoView();
@@ -34,7 +36,7 @@ define([
 			var name   = $scope.newMethodName;
 			var method = $scope.thing.addMethod( name );
 			if (method) {
-				$scope.$emit("fbSet", "/things/"+method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
+				$scope.$emit("fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.id + "/things/" + method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
 				$scope.newMethodName = "";
 			} else {
 				alert( "already exists!" );
@@ -46,8 +48,6 @@ define([
 			
 			return true;
 		};
-
-		$scope.method = $scope.thing.methods.construct;
 	};
 
 	haxrs.directive("thing", ThingDirCtrl);
