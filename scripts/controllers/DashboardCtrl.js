@@ -46,7 +46,11 @@ define( [
 			}
 			appref = firebase.ref.child("users/"+session.user.id);
 			appref.on("value", function (data) {
-				var userdata = data.val();
+				var userdata = data.val() || {};
+				if (!userdata.apps) {
+					userdata.apps = {};
+				}
+				
 				var o = {};
 				
 				for (var i in userdata.apps) {
