@@ -50,7 +50,7 @@ define( [
 				if (!userdata.apps) {
 					userdata.apps = {};
 				}
-				
+
 				var o = {};
 				
 				for (var i in userdata.apps) {

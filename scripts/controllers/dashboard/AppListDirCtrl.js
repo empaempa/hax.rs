@@ -24,7 +24,7 @@ define([
 			if (!$scope.userdata || !name || !$scope.session || !$scope.session.user) {
 				return;
 			}
-
+			
 			if (!$scope.userdata.apps[name]) {
 				var app = new App({name: name, owner: $scope.session.user.id});
 				app.addMainThing();
