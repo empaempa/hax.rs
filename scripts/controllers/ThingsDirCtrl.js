@@ -17,8 +17,6 @@ define([
 	}
 
 	ThingsDirCtrl.controller = function ( $scope, $element, $timeout ) {
-
-		$scope.currentThing = "Main";
 		//$scope.thing = $scope.app.things.Main;
 
 		$scope.addThing = function () {
@@ -26,15 +24,26 @@ define([
 			if (thing) {
 				$scope.newThingName         = "";
 				$scope.app.things[ thing.name ] = thing;
-				$scope.$emit( "fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.id + "/things/" + thing.name, JSON.parse( JSON.stringify( thing )));
+				$scope.$emit( "fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.name + "/things/" + thing.name, JSON.parse( JSON.stringify( thing )));
 			} else {
 				alert( "Already exists!" );
 			}
+		};
+
+		$scope.showMethod = function (method) {
+			//$scope.method = method;
+			method.element[0].scrollIntoView();
 		}
 
-		$scope.showThing = function ( thing ) {
-			$scope.thing = thing;
-			$scope.currentThing = thing.name;
+		$scope.addMethod = function (scope) {
+			var name = scope.newMethodName;
+			var method = scope.thing.addMethod( name );
+			if (method) {
+				$scope.$emit("fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.name + "/things/" + method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
+				scope.newMethodName = "";
+			} else {
+				alert( "already exists!" );
+			}
 		}
 	};
 

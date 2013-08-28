@@ -51,9 +51,8 @@ define( [
 			if (appref) {
 				appref.off("value");
 			}
-			appref = firebase.ref.child("users/"+user.id+"/apps/"+app.id);
+			appref = firebase.ref.child("users/"+user.id+"/apps/"+app.name);
 			appref.on("value", function (data) {
-				console.log(data.val());
 				app.fromJSON(data.val());
 				$scope.safeApply();
 			});

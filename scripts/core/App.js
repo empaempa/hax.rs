@@ -7,27 +7,31 @@ define( [
 
 		function App() {
 			this.things = {};
-			this.id = 1;
-			this.name = "My First App!";
+			this.name = "MyFirstApp";
 			
 			this.nativeCode = "";
 			//this.onChange = new signals.Signal();
-			//this.addMainThing();
+			this.addMainThing();
 		}
+
 		App.prototype.toJSON = function() {
 			return {
 				name: this.name,
 				things: this.things
 			};
 		};
+
 		App.prototype.fromJSON = function(json) {
 
-			//console.log(json);
-
-			if (!json) return;
+			if (!json) {
+				return;
+			}
 
 			if (json.hasOwnProperty("name")) {
 				this.name = json.name;
+			}
+			if (json.hasOwnProperty("id")) {
+				this.id = json.id;
 			}
 
 			this.nativeCode = "";

@@ -7,6 +7,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	font-family: sans-serif;
 }
 
 .right {
@@ -76,13 +77,46 @@ body {
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	width: 100px;
+	width: 150px;
 	bottom: 0;
 	background-color: white;
 	border-right: 1px solid #ddd;
+	padding: 10px 0px;
+}
+.thingList ul {
+	list-style-type: none;
+}
+.thingList ul {
+	margin: 0px;
+	padding: 0px;
+}
+.thingList > ul > li {
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+.thingList ul li span {
+	display: block;
+}
+.thingList > ul > li > span {
+	padding-left: 10px;
+}
+.thingList > ul > li > form {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.thingList > ul > li > ul > li > span {
+	padding-left: 30px;
+	cursor: pointer;
+}
+.thingList > ul > li > ul > li > form {
+	margin-left: 30px;
+	padding-right: 10px;
+}
+.thingList > ul > li > ul > li:hover > span {
+	background-color: #DEF;
 }
 
-.methodList {
+/*.methodList {
 	overflow: auto;
 	left: 0px;
 	top: 0px;
@@ -91,7 +125,7 @@ body {
 	background-color: white;
 	border-right: 1px solid #ddd;
 	position: absolute;
-}
+}*/
 
 .thingList button,
 .thingList input[ type="submit"],
@@ -102,14 +136,15 @@ body {
 
 .thingList input[type="text"],
 .methodList input[type="text"] {
-	width: 80px;
-	text-align: center;
+	/*width: 80px;*/
+	display: block;
+	width: 100%;
 }
 
 .thing {
 	overflow: auto;
 	position: absolute;
-	left: 100px;
+	left: 150px;
 	top: 0px;
 	right: 0px;
 	bottom: 0;
@@ -119,7 +154,7 @@ body {
 .thing .thingwrapper {
 	overflow: auto;
 	position: absolute;
-	left: 100px;
+	left: 0px;
 	right: 0px;
 	top: 0px;
 	bottom: 0px;
