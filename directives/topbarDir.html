@@ -2,7 +2,7 @@
 
 <div class="right">
 	<button ng-click="login()" ng-if="!session.user">Log In</button>
-	<button ng-click="logoutUser()" ng-if="session.user">Logout</button>
+	<button ng-click="logoutUser()" ng-if="session.user">Logout {{userdata.name}}</button>
 	<button ng-click="signup()" ng-if="!session.user">Sign Up</button>
 </div>
 

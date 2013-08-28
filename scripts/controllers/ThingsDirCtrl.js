@@ -24,7 +24,7 @@ define([
 			if (thing) {
 				$scope.newThingName         = "";
 				$scope.app.things[ thing.name ] = thing;
-				$scope.$emit( "fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.name + "/things/" + thing.name, JSON.parse( JSON.stringify( thing )));
+				$scope.$emit( "fbSet", "users/"+$scope.app.owner+"/apps/" + $scope.app.id + "/things/" + thing.name, JSON.parse( JSON.stringify( thing )));
 			} else {
 				alert( "Already exists!" );
 			}
@@ -39,7 +39,7 @@ define([
 			var name = scope.newMethodName;
 			var method = scope.thing.addMethod( name );
 			if (method) {
-				$scope.$emit("fbSet", "users/"+($scope.session.user?$scope.session.user.id:"anonymous")+"/apps/" + $scope.app.name + "/things/" + method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
+				$scope.$emit("fbSet", "users/"+$scope.app.owner+"/apps/" + $scope.app.id + "/things/" + method.thing.name+"/methods/"+method.name, JSON.parse(JSON.stringify(method)));
 				scope.newMethodName = "";
 			} else {
 				alert( "already exists!" );

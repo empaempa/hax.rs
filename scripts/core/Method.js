@@ -34,7 +34,7 @@ define( [
 			name: this.name,
 			type: this.type,
 			parameters: this.parameters,
-			code: this.code
+			//code: this.code
 		};
 	};
 

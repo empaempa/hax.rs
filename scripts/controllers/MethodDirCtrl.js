@@ -30,7 +30,7 @@ define([
 		method.editor = editor;
 		method.element = $element;
 
-		var firepad = Firepad.fromCodeMirror($scope.firebase.ref.child("users/"+($scope.session.user? $scope.session.user.id : "anonymous")+"/apps/"+$scope.app.name+"/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
+		var firepad = Firepad.fromCodeMirror($scope.firebase.ref.child("users/"+$scope.app.owner+"/apps/"+$scope.app.id+"/things/"+method.thing.name+"/methods/"+method.name+"/pad"), editor);
 		firepad.on('ready', function () {
 
 			//if (firepad.isHistoryEmpty()) {

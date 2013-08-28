@@ -17,7 +17,7 @@ define([
 		$routeProvider.
 			when( "/",       { controller: "AppCtrl.DashboardCtrl", template: dashboardTemplate } ).
 			when( "/editor", { controller: "AppCtrl.EditorCtrl", template: editorTemplate } ).
-			when( "/editor/:name", { controller: "AppCtrl.EditorCtrl", template: editorTemplate } ).
+			when( "/editor/:userid/:appid", { controller: "AppCtrl.EditorCtrl", template: editorTemplate } ).
 			when( "/signup", { controller: "AppCtrl.EditorCtrl", template: signupTemplate } ).
 			when( "/login",  { controller: "AppCtrl.EditorCtrl", template: loginTemplate  } ).
 			otherwise( { redirectTo: "/" } );

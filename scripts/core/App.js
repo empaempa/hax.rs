@@ -6,12 +6,14 @@ define( [
 		"use strict";
 
 		function App(config) {
+			config = config || {};
 			this.things = {};
+			this.owner = config.owner || "anonymous";
+			this.id = config.id || null;
 			this.name = config.name || "MyFirstApp";
 			
 			this.nativeCode = "";
 			//this.onChange = new signals.Signal();
-			this.addMainThing();
 		}
 
 		App.prototype.toJSON = function() {

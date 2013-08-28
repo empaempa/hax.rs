@@ -1,5 +1,15 @@
-Apps:
+Your apps:
 
-<ul>
-	<li ng-repeat="(name, app) in userdata.apps"><a href="#/editor/{{name}}">{{name}}</a></li>
-</ul>
+<table>
+	<thead></thead>
+	<tbody>
+		<tr ng-repeat="(id, app) in userdata.apps">
+			<td><a href="#/editor/{{session.user.id}}/{{id}}">{{app.name}}</a></td>
+			<td><button ng-click="removeApp(this)">Remove</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<form ng-submit="addApp()">
+	<input type="text" ng-model="newAppName" placeholder="{{i18n('editor.AddApp')}}">
+</form>

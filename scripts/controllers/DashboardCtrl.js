@@ -46,12 +46,18 @@ define( [
 			}
 			appref = firebase.ref.child("users/"+session.user.id);
 			appref.on("value", function (data) {
-				$scope.userdata = data.val();
+				var userdata = data.val();
+				var o = {};
+				
+				for (var i in userdata.apps) {
+					o[i] = userdata.apps[i];
+				}
+				userdata.apps = o;
+
+				$scope.userdata = userdata;
 				$scope.safeApply();
 			});
 		}
-
-		
 
 	};
 

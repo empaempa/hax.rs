@@ -16,11 +16,12 @@ define( [
 
 	// EditorCtrl controllers
 
-	EditorCtrl.controller = function( $scope, firebase, i18n, session, $routeParams ) {
+	EditorCtrl.controller = function( $scope, firebase, i18n, session, $routeParams, $location ) {
 		
-		var appname = $routeParams.name;
+		var appid = $routeParams.appid;
+		var userid = $routeParams.userid;
 
-		var app = new App({name: appname});
+		var app = new App({owner: userid, id: appid});
 
 		//var root = new Firebase(config.firebase);
 		//var auth = angularFireAuth(root);
@@ -52,18 +53,15 @@ define( [
 
 		var appref = null;
 
-		$scope.$on("angularFireAuth:login", function (evt, user) {
-			updateApp();
-		});
-		if (session.user) {
-			updateApp();
-		}
+		
+		updateApp();
+		
 
 		function updateApp() {
 			if (appref) {
 				appref.off("value");
 			}
-			appref = firebase.ref.child("users/"+session.user.id+"/apps/"+app.name);
+			appref = firebase.ref.child("users/"+userid+"/apps/"+appid);
 			appref.on("value", function (data) {
 				app.fromJSON(data.val());
 				$scope.safeApply();

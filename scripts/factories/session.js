@@ -21,6 +21,7 @@ define([
 					}});
 				}
 				session.scope = $scope;
+				$scope.session = session;
 				alreadyInit = true;
 			},
 
