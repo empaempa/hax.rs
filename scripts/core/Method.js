@@ -10,7 +10,7 @@ define( [
 		this.type       = parameters.type || Method.INSTANCE;
 		this.parameters = [];
 		this.code       = parameters.code || "";
-		this.editor = null;
+		this.editor  = null;
 		this.firepad = null;
 		this.element = null;
 

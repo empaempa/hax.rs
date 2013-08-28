@@ -1,9 +1,14 @@
 <img ng-click="home()" src="assets/logo.png">
 
 <div class="right">
+	<select ng-if="session.user && userdata.apps" ng-change="changeApp(this)" ng-model="selectApp" ng-init="initSelectApp(this)">
+		<option value="">Load app</option>
+		<option ng-repeat="(id, app) in userdata.apps" value="{{id}}">{{app.name}}</option>
+	</select>
 	<button ng-click="login()" ng-if="!session.user">Log In</button>
 	<button ng-click="logoutUser()" ng-if="session.user">Logout {{userdata.name}}</button>
 	<button ng-click="signup()" ng-if="!session.user">Sign Up</button>
 </div>
 
 <!--Change language: <select ng-change="changeLanguage()" ng-model="language" ng-options="code for (code, code) in config.locale.languages"></select>-->
+

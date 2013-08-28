@@ -16,6 +16,9 @@ define([
 	}
 
 	TopbarDirCtrl.controller = function( $scope, $element, $location, session ) {
+
+		$scope.selectApp = "";
+
 		$scope.login = function() {
 			$location.path( "login" );
 		};
@@ -38,6 +41,18 @@ define([
 
 		$scope.addUser = function () {
 			session.createUser($scope, $scope.registerForm);
+		};
+
+		$scope.changeApp = function (scope) {
+
+			if (scope.selectApp) {
+				$location.path("/editor/"+$scope.session.user.id+"/"+scope.selectApp);
+			}
+			//scope.selectApp = "";
+		};
+
+		$scope.initSelectApp = function (scope) {
+			
 		};
 	};
 

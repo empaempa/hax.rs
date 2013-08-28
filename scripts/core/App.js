@@ -1,7 +1,6 @@
 define( [
-	"core/Thing",
-	"signals" ],
-	function( Thing, signals ) {
+	"core/Thing"
+], function( Thing ) {
 
 		"use strict";
 

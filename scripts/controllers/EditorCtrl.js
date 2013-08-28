@@ -51,22 +51,44 @@ define( [
 
 		});*/
 
+		firebase.ref.child("users/"+userid+"/apps/"+appid).on("value", function (data) {
+			app.fromJSON(data.val());
+			$scope.safeApply();
+		});
+
 		var appref = null;
 
-		
-		updateApp();
-		
+		$scope.$on("angularFireAuth:login", function (evt, user) {
+			updateUserData();
+		});
+		if (session.user) {
+			updateUserData();
+		}
 
-		function updateApp() {
+		function updateUserData() {
 			if (appref) {
 				appref.off("value");
 			}
-			appref = firebase.ref.child("users/"+userid+"/apps/"+appid);
+			appref = firebase.ref.child("users/"+session.user.id);
 			appref.on("value", function (data) {
-				app.fromJSON(data.val());
+				var userdata = data.val() || {};
+				if (!userdata.apps) {
+					userdata.apps = {};
+				}
+
+				var o = {};
+				
+				for (var i in userdata.apps) {
+					o[i] = userdata.apps[i];
+				}
+				userdata.apps = o;
+
+				$scope.userdata = userdata;
 				$scope.safeApply();
 			});
 		}
+		
+
 		
 		
 

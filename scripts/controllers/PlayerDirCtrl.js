@@ -22,6 +22,10 @@ define([
 			elements: $element.find(".player-elements"),
 			app: $scope.app
 		});
+
+		$scope.$on("$destroy", function () {
+			$scope.player.stop();
+		});
 	};
 
 	haxrs.directive("player", PlayerDirCtrl);
