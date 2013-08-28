@@ -6,19 +6,22 @@ define([
 	"use strict";
 
 	haxrs.factory("session", function ( $location, angularFireAuth ) {
-
+		var alreadyInit = false;
 		var session = {
 
 			user: null,
 			scope: null,
 
 			init: function ($scope) {
-				angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'session.user', callback: function (err, user) {
-					session.user = user;
-					err && console.warn(err);
-					$scope.safeApply();
-				}});
+				if (!alreadyInit) {
+					angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'session.user', callback: function (err, user) {
+						session.user = user;
+						err && console.warn(err);
+						$scope.safeApply();
+					}});
+				}
 				session.scope = $scope;
+				alreadyInit = true;
 			},
 
 			login: function ($scope, form) {

@@ -27,19 +27,18 @@ require( [
 	"angular",
 	"haxrs",
 
+	"controllers/DashboardCtrl",
 	"controllers/EditorCtrl",
 
-	"core/App",
 	"core/Locale!",
 	"json!config",
 
 	"util/loader"
-], function( angular, haxrs, EditorCtrl, App, Locale, config ) {
+], function( angular, haxrs, DashboardCtrl, EditorCtrl, Locale, config ) {
 	"use strict";
 
-	var editor = new EditorCtrl();
-	var app    = new App();
-	haxrs.value( "app", app );
+	new DashboardCtrl();
+	new EditorCtrl();
 
 	// just add some working code
 	/*app.getThing( "Main" ).getMethod( "construct" ).code = "min.gubbe = ny Gubbe();";

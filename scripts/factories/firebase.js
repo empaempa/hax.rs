@@ -6,6 +6,7 @@ define([
 	"use strict";
 
 	haxrs.factory("firebase", function () {
+		var alreadyInit = false;
 
 		var firebase = {
 
@@ -14,8 +15,10 @@ define([
 			ref: null,
 
 			init: function ($scope) {
-				firebase.ref = new Firebase(config.firebase);
 				firebase.scope = $scope;
+				if (!alreadyInit) {
+					firebase.ref = new Firebase(config.firebase);
+				}
 
 				$scope.$on('fbSet', function (e, path, data) {
 					console.log(path, data);
@@ -27,7 +30,7 @@ define([
 				$scope.$on('fbRemove', function (e, path) {
 					firebase.ref.child(path).remove();
 				});
-
+				alreadyInit = true;
 			},
 
 			

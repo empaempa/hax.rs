@@ -15,7 +15,7 @@ define([
 		return directiveDefinitionObject;
 	}
 
-	TopbarDirCtrl.controller = function( $scope, $element, $location ) {
+	TopbarDirCtrl.controller = function( $scope, $element, $location, session ) {
 		$scope.login = function() {
 			$location.path( "login" );
 		};
@@ -27,6 +27,18 @@ define([
 		$scope.home = function() {
 			$location.path( "" );
 		}
+
+		$scope.loginUser = function () {
+			session.login($scope, $scope.loginForm);
+		};
+
+		$scope.logoutUser = function () {
+			session.logout($scope);
+		};
+
+		$scope.addUser = function () {
+			session.createUser($scope, $scope.registerForm);
+		};
 	};
 
 	haxrs.directive("topbar", TopbarDirCtrl);

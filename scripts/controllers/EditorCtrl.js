@@ -2,21 +2,26 @@ define( [
 	"haxrs",
 
 	"json!config",
-	"core/Locale!"
-], function( haxrs, config, Locale ) {
+	"core/Locale!",
+	"core/App"
+], function( haxrs, config, Locale, App ) {
 	"use strict";
 
 	// constructor
 
 	function EditorCtrl() {
-		haxrs.controller( "EditorCtrl.AppCtrl",    EditorCtrl.appController    );
+		haxrs.controller( "AppCtrl.EditorCtrl",    EditorCtrl.controller    );
 		haxrs.value( "editorCtrl", this );
 	}
 
 	// EditorCtrl controllers
 
-	EditorCtrl.appController = function( $scope, app, firebase, i18n, session ) {
+	EditorCtrl.controller = function( $scope, firebase, i18n, session, $routeParams ) {
 		
+		var appname = $routeParams.name;
+
+		var app = new App({name: appname});
+
 		//var root = new Firebase(config.firebase);
 		//var auth = angularFireAuth(root);
 		//angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'user'});
@@ -45,18 +50,25 @@ define( [
 
 		});*/
 
-		var appref = null;		
+		var appref = null;
 
 		$scope.$on("angularFireAuth:login", function (evt, user) {
+			updateApp();
+		});
+		if (session.user) {
+			updateApp();
+		}
+
+		function updateApp() {
 			if (appref) {
 				appref.off("value");
 			}
-			appref = firebase.ref.child("users/"+user.id+"/apps/"+app.name);
+			appref = firebase.ref.child("users/"+session.user.id+"/apps/"+app.name);
 			appref.on("value", function (data) {
 				app.fromJSON(data.val());
 				$scope.safeApply();
 			});
-		});
+		}
 		
 		
 
@@ -71,18 +83,6 @@ define( [
 			Locale.onLocaleLoaded.addOnce($scope.safeApply.bind(this));
 			Locale.setLanguage($scope.language);
 			$scope.language = config.locale.languages[$scope.language];
-		};
-
-		$scope.loginUser = function () {
-			session.login($scope, $scope.loginForm);
-		};
-
-		$scope.logoutUser = function () {
-			session.logout($scope);
-		};
-
-		$scope.addUser = function () {
-			session.createUser($scope, $scope.registerForm);
 		};
 
 		$scope.pusher = function () {

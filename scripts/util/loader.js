@@ -7,5 +7,6 @@ define([
 	"controllers/ThingDirCtrl",
 	"controllers/MethodDirCtrl",
 	"controllers/PlayerDirCtrl",
-	"controllers/TopbarDirCtrl"
+	"controllers/TopbarDirCtrl",
+	"controllers/dashboard/AppListDirCtrl"
 ]);

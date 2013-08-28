@@ -5,9 +5,9 @@ define( [
 
 		"use strict";
 
-		function App() {
+		function App(config) {
 			this.things = {};
-			this.name = "MyFirstApp";
+			this.name = config.name || "MyFirstApp";
 			
 			this.nativeCode = "";
 			//this.onChange = new signals.Signal();
