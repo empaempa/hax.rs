@@ -45,7 +45,7 @@ define([
 					if (user) {
 						form.email = '';
 						form.password = '';
-						$location.path("/login");
+						$location.path("/");
 					} else {
 						alert("Error creating user");
 					}
