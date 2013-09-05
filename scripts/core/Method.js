@@ -10,47 +10,28 @@ define( [
 		this.type       = parameters.type || Method.INSTANCE;
 		this.parameters = [];
 		this.code       = parameters.code || "";
-		this.editor  = null;
-		this.firepad = null;
-		this.element = null;
-
-		
-		
-
-		/*editor.on( "change", function(inst, changeObj) {
-			method.code = editor.getValue();
-			
-			if (changeObj.origin !== "setValue") {
-				console.log("CHANGED", arguments);
-				$scope.$emit("fbSet", "/things/"+method.thing.name+"/methods/"+method.name+"/code", method.code);
-			}
-		} );*/
-
-		
-
+		this.editor     = null;
+		this.firepad    = null;
+		this.element    = null;
 	}
+
 	Method.prototype.toJSON = function () {
 		return {
-			name: this.name,
-			type: this.type,
+			name: 		this.name,
+			type: 		this.type,
 			parameters: this.parameters,
-			//code: this.code
 		};
 	};
 
 	Method.prototype.fromJSON = function( json ) {
-
-		
 		this.thing = json.thing;
-		this.name = json.name;
-		this.type = json.type;
-		//this.setCode( json.code );
-
+		this.name  = json.name;
+		this.type  = json.type;
 
 		this.parameters.length = 0;
-		if (Array.isArray(json.parameters)) {
-			for (var i = 0; i < json.parameters.length; i++) {
-				this.parameters.push(json.parameters[i]);
+		if( Array.isArray( json.parameters )) {
+			for( var i = 0; i < json.parameters.length; i++ ) {
+				this.parameters.push( json.parameters[ i ] );
 			}
 		}
 	};

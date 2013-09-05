@@ -1,67 +1,106 @@
 define([
 	"haxrs",
+	"json!config",
+	"core/User" ],
 
-	"json!config"
-], function (haxrs, config) {
-	"use strict";
+	function( haxrs, config, User ) {
+	
+		"use strict";
 
-	haxrs.factory("session", function ( $location, angularFireAuth ) {
-		var alreadyInit = false;
-		var session = {
+		haxrs.factory( "session", function( $location, $rootScope, angularFireAuth, firebase, safeApply ) {
 
-			user: null,
-			scope: null,
+			// public
 
-			init: function ($scope) {
-				if (!alreadyInit) {
-					angularFireAuth.initialize(config.firebase, {scope: $scope, name: 'session.user', callback: function (err, user) {
-						session.user = user;
-						err && console.warn(err);
-						$scope.safeApply();
-					}});
+			var session = {
+				user: 			undefined,
+				isLoggingIn: 	true,
+				isLoggedIn: 	false,
+
+				signUp: function( name, email, password ) {
+					session.isLoggingIn = true;
+
+					angularFireAuth.createUser( email, password, function( firebaseUser ) {
+						if( firebaseUser ) {
+							session.user = new User();
+							session.user.setDetails( {
+								id: 	firebaseUser.id,
+								email: 	firebaseUser.email,
+								name: 	name
+							});
+
+							session.login( email, password );
+						}
+					} );
+				},
+
+				login: function( email, password ) {
+					session.isLoggingIn = true;
+					angularFireAuth.login( "password", { email: email, password: password } );
+				},
+
+				logout: function( $scope ) {
+					session.isLoggingIn = false;
+					angularFireAuth.logout();
+
+					$location.path("/login");
 				}
-				session.scope = $scope;
-				$scope.session = session;
-				alreadyInit = true;
-			},
+			};
 
-			login: function ($scope, form, cb) {
-				$scope.isLoggingIn = true;
-				angularFireAuth.login("password", {email: form.email, password: form.password}).then(function (user) {
-					form.email = '';
-					$location.path("/");
-					if (typeof cb === 'function') {
-						cb(user);
-					}
-				}, function (err) {
-					$scope.isLoggingIn = false;
-					alert("Login unsuccessful\n"+err);
-				});
-				form.password = '';
-			},
-			logout: function ($scope) {
-				angularFireAuth.logout();
-				$scope.isLoggingIn = false;
-				$location.path("/login");
-			},
-			createUser: function ($scope, form) {
-				angularFireAuth.createUser(form.email, form.password, function (user) {
-					if (user) {
-						//session.logout($scope);
-						//console.log(form);
-						session.login($scope, form, function () {
-							$scope.$emit("fbSet", "users/"+user.id+"/name", form.name);
-						});
-						form.email = '';
-						form.password = '';
+			// init session
+
+			$rootScope.session = session;
+
+			angularFireAuth.initialize( config.firebase, { callback: function( error, firebaseUser ) {
+				if( error ) {
+					console.log( "Error: ", error );
+					return;
+				}
+
+				if( firebaseUser ) {
+					session.isLoggingIn = true;
+
+					if( session.user ) {
+						firebase.child( session.user.path ).set( session.user.asJSON(), function( error ) {
+							session.isLoggingIn = false;
+							session.isLoggedIn  = true;
+							
+							$location.path( "/dashboard" );
+							safeApply( $rootScope );
+						} );
 					} else {
-						alert("Error creating user");
+						session.user = new User();
+						session.user.setDetails( {
+							id: 	firebaseUser.id,
+							email: 	firebaseUser.email
+						});
+
+						// maybe here we should setup the user sync process?
+						firebase.child( session.user.path ).once( "value", function( snapshot ) {
+							session.user.fromJSON( snapshot.val());
+
+							session.isLoggingIn = false;
+							session.isLoggedIn  = true;
+	
+							if( $location.path() === "/login" ) {
+								$location.path( "/dashboard" );
+							}
+
+							safeApply( $rootScope );
+						});
 					}
+				} else {
+					session.user        = undefined;
+					session.isLoggingIn = false;
+					session.isLoggedIn  = false;
+
+					$location.path( "/login" );
 					
-				});
+				}
 				
-			}
-		};
-		return session;
-	});
-});
+				safeApply( $rootScope );
+			} } );
+
+			return session;
+		});
+	}
+);

@@ -1,41 +1,28 @@
 define([
 	"haxrs",
+	"json!config" ],
 
-	"json!config"
-], function (haxrs, config) {
-	"use strict";
+	function (haxrs, config) {
+	
+		"use strict";
 
-	haxrs.factory("firebase", function () {
-		var alreadyInit = false;
+		haxrs.factory( "firebase", function( $rootScope, safeApply ) {
 
-		var firebase = {
+			var firebase = new Firebase( config.firebase );
 
-			url: config.firebase,
-			scope: null,
-			ref: null,
+			$rootScope.$on( "fbSet", function( e, path, data, callback ) {
+				firebase.child( path ).set( data, callback );
+			});
+			$rootScope.$on( "fbUpdate", function( e, path, data, callback ) {
+				firebase.child( path ).update( data, callback );
+			});
+			$rootScope.$on( "fbRemove", function( e, path, callback ) {
+				firebase.child( path ).remove( callback );
+			});
 
-			init: function ($scope) {
-				firebase.scope = $scope;
-				if (!alreadyInit) {
-					firebase.ref = new Firebase(config.firebase);
-				}
+			$rootScope.firebase = firebase;
 
-				$scope.$on('fbSet', function (e, path, data) {
-					console.log(path, data);
-					firebase.ref.child(path).set(data);
-				});
-				$scope.$on('fbUpdate', function (e, path, data) {
-					firebase.ref.child(path).update(data);
-				});
-				$scope.$on('fbRemove', function (e, path) {
-					firebase.ref.child(path).remove();
-				});
-				alreadyInit = true;
-			},
-
-			
-			
-		};
-		return firebase;
-	});
-});
+			return firebase;
+		});
+	}
+);

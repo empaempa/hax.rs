@@ -24,22 +24,36 @@
 		}
 	},
 	"content": {
+		"dashboard": {
+			"addApp": "Ny app...",
+			"yourApps": "Dina appar:",
+			"delete": "Ta bort"
+		},
 		"editor": {
 			"Login": "Logga in",
 			"Things": "Saker",
 			"ThingsIn": "Saker i",
 			"AddThing": "Ny sak...",
+			"ThingAlreadyExists": "En sån sak finns redan!",
 			"RemoveThing": "Ta bort sak",
 			"RenameThing": "Byt namn på sak",
 			"Add": "Lägg till",
 			"Remove": "Ta bort",
 			"Methods": "Funktioner på",
-			"AddMethod": "Ny metod...",
-			"RemoveMethod": "Ta bort metod",
+			"AddMethod": "Ny funktion...",
+			"MethodAlreadyExists": "En sån funktion finns redan!",
+			"RemoveMethod": "Ta bort funktion",
 			"Run": "Kör",
 			"Stop": "Stopp",
 			"Pause": "Pausa",
 			"Resume": "Fortsätt"
+		},
+		"app": {
+			"main": "Spel",
+			"constructor": "vakna",
+			"update": "uppdatera",
+			"deltaTime": "tidsskillnad",
+			"welcomeLog": "Tjena världen!"
 		}
 	},
 	"core": {

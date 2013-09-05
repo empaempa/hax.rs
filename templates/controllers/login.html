@@ -1,6 +1,6 @@
 <topbar class="topbar"></topbar>
 <div id="content">
-	<form ng-submit="loginUser()" ng-if="!session.user">
+	<form ng-submit="login()" ng-if="!session.isLoggedIn">
 		Login: <input type="email" name="email" ng-model="loginForm.email" ng-disabled="isLoggingIn" placeholder="email">
 		<input type="password" name="password" ng-model="loginForm.password" ng-disabled="isLoggingIn" placeholder="password">
 		<button type="submit">{{i18n('editor.Login')}}</button>

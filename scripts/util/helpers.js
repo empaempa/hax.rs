@@ -1,19 +1,22 @@
-define([], function () {
-	"use strict";
+define( [], 
+	function () {
 
-	var helpers = {};
+		"use strict";
 
-	helpers.construct = function (constructor, args) {
-		function F() {
-			return constructor.apply(this, args);
-		}
-		F.prototype = constructor.prototype;
-		return new F();
-	};
+		var helpers = {};
 
-	helpers.now = function () {
-		return typeof performance === "object" && typeof performance.now === "function" ? performance.now() : new Date().getTime();
-	};
+		helpers.construct = function (constructor, args) {
+			function F() {
+				return constructor.apply(this, args);
+			}
+			F.prototype = constructor.prototype;
+			return new F();
+		};
 
-	return helpers;
-});
+		helpers.now = function () {
+			return typeof performance === "object" && typeof performance.now === "function" ? performance.now() : new Date().getTime();
+		};
+
+		return helpers;
+	}
+);

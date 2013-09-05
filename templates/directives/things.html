@@ -1,11 +1,3 @@
-<!--<select ng-model="thing" ng-options="t.name for t in things"></select>-->
-
-
-<!--<ul class="thinglist">
-	<li ng-repeat="thing in things"><thing class="thing"></thing></li>
-</ul>-->
-
-
 <thing class="thing"></thing>
 
 <div class="thingList">
@@ -13,7 +5,7 @@
 	<div class="separator"/>
 	<ul>
 		<li ng-repeat="thing in app.things">
-			<span>{{thing.name}}</span>
+			<span ng-click="showThing(thing)">{{thing.name}}</span>
 			<ul>
 				<li ng-repeat="method in thing.methods"><span ng-click="showMethod(method)">{{method.name}}</span></li>
 				<li>
@@ -29,15 +21,4 @@
 			</form>
 		</li>
 	</ul>
-	
-	
 </div>
-
-<!--<ul ng-repeat="thing in things" ng-controller="EditorCtrl.ThingCtrl">
-	<li>
-		{{ thing.name }}<br>
-		<thing-editor></thing-editor>
-	</li>
-	
-</ul>-->
-<!--<textarea cols=80 rows=30>{{app.nativeCode}}</textarea>-->

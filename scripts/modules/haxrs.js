@@ -1,25 +1,26 @@
 define([
 	"angular",
+	"angularfire",
+	"text!controllerTemplates/landing.html",
+	"text!controllerTemplates/dashboard.html",
+	"text!controllerTemplates/editor.html",
+	"text!controllerTemplates/signup.html",
+	"text!controllerTemplates/login.html",
 
-	"text!../partials/dashboard.html",
-	"text!../partials/editor.html",
-	"text!../partials/signup.html",
-	"text!../partials/login.html",
+], function( angular, angularFire, landingTemplate, dashboardTemplate, editorTemplate, signUpTemplate, loginTemplate ) {
 
-	// Load only
-	"angularfire"
-], function (angular, dashboardTemplate, editorTemplate, signupTemplate, loginTemplate) {
 	"use strict";
 
-	var haxrs  = angular.module( "haxrs", ['firebase'] );
+	var haxrs  = angular.module( "haxrs", [ "firebase" ] );
 
 	haxrs.config(function( $routeProvider ) {
 		$routeProvider.
-			when( "/",       { controller: "AppCtrl.DashboardCtrl", template: dashboardTemplate } ).
-			when( "/editor", { controller: "AppCtrl.EditorCtrl", template: editorTemplate } ).
-			when( "/editor/:userid/:appid", { controller: "AppCtrl.EditorCtrl", template: editorTemplate } ).
-			when( "/signup", { controller: "AppCtrl.EditorCtrl", template: signupTemplate } ).
-			when( "/login",  { controller: "AppCtrl.EditorCtrl", template: loginTemplate  } ).
+			when( "/",       				{ controller: "landingController",   template: landingTemplate   } ).
+			when( "/signup", 				{ controller: "signUpController",    template: signUpTemplate    } ).
+			when( "/login",  				{ controller: "loginController",     template: loginTemplate     } ).
+			when( "/:userid",       		{ controller: "dashboardController", template: dashboardTemplate } ).
+			when( "/editor", 				{ controller: "editorController",    template: editorTemplate    } ).
+			when( "/editor/:userID/:appID", { controller: "editorController",    template: editorTemplate    } ).
 			otherwise( { redirectTo: "/" } );
 	});
 

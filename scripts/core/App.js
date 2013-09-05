@@ -1,64 +1,75 @@
 define( [
-	"core/Thing"
-], function( Thing ) {
+	"core/Thing",
+	"core/Locale!"
+], function( Thing, Locale ) {
 
 		"use strict";
 
-		function App(config) {
-			config = config || {};
-			this.things = {};
-			this.owner = config.owner || "anonymous";
-			this.id = config.id || null;
-			this.name = config.name || "MyFirstApp";
-			
+		function App( config ) {
+			config          = config || {};
+			this.things     = {};
+			this.owner      = config.owner || "anonymous";
+			this.id         = config.id    || undefined;
+			this.name       = config.name  || "Min app!";
 			this.nativeCode = "";
-			//this.onChange = new signals.Signal();
 		}
 
 		App.prototype.toJSON = function() {
-			return {
-				name: this.name,
+			return JSON.parse( JSON.stringify( {
+				id: 	this.id,
+				name: 	this.name,
+				owner: 	this.owner,
 				things: this.things
-			};
+			}));
 		};
 
-		App.prototype.fromJSON = function(json) {
-
-			if (!json) {
-				return;
-			}
-
-			if (json.hasOwnProperty("name")) {
-				this.name = json.name;
-			}
-			if (json.hasOwnProperty("id")) {
-				this.id = json.id;
-			}
-
-			this.nativeCode = "";
-
-			// Add/update
-			for (var name in json.things) {
-				if (!this.doesThingExist(name)) {
-					this.addThing(name);
+		App.prototype.fromJSON = function( json ) {
+			if( json ) {
+				if( json.hasOwnProperty( "name" )) {
+					this.name = json.name;
 				}
-				this.things[name].fromJSON(json.things[name]);
-			}
+				if( json.hasOwnProperty( "id" )) {
+					this.id = json.id;
+				}
+				if( json.hasOwnProperty( "owner" )) {
+					this.owner = json.owner;
+				}
 
-			// Remove
-			for (var name in this.things) {
-				if (!json.things.hasOwnProperty(name)) {
-					this.removeThing(name);
+				this.nativeCode = "";
+
+				// Add/update
+				for( var name in json.things ) {
+					if( !this.doesThingExist( name )) {
+						this.addThing( name );
+					}
+					this.things[ name ].fromJSON( json.things[ name ] );
+				}
+
+				// Remove
+				for( var name in this.things ) {
+					if( !json.things.hasOwnProperty( name )) {
+						this.removeThing( name );
+					}
 				}
 			}
+
+			return this;
 		};
 
 		App.prototype.doesThingExist = function( name ) {
 			return this.things.hasOwnProperty( name );
 		};
 
-		App.prototype.addMainThing = function( ) {
-			this.addThing( "Main" ).addMethod( "update" ).addParameter( "deltaTime" );
+		App.prototype.addMainThing = function() {
+			this.addThing    ( Locale.translateApp( "main" ))
+				.addMethod   ( Locale.translateApp( "update" ))
+				.addParameter( Locale.translateApp( "deltaTime" ));
+			
+			return this;
+		};
+
+		App.prototype.getMainThing = function() {
+			return this.getThing( Locale.translateApp( "main" ));
 		};
 
 		App.prototype.addThing = function( name ) {
